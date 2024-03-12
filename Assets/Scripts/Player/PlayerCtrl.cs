@@ -20,7 +20,7 @@ public class PlayerCtrl : MonoBehaviour
     {
         if (playerController != null)
         {
-           // playerController.JumpRefresh(); 
+            playerController.JumpRefresh(); 
         }
     }
 }
