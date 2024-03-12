@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerJumpController : MonoBehaviour
 {
     [Header("Jump Mechanic")]
     [SerializeField] Rigidbody2D rb;
     [SerializeField] float jumpForce;
-    [SerializeField] bool isJump;
+    [SerializeField] internal bool isJump;
     [SerializeField] int numberOfJump = 2;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,7 +40,6 @@ public class PlayerController : MonoBehaviour
     }
     internal void JumpRefresh()
     {
-        print("Jump Refreshed");
         numberOfJump = 2;
     }
 }
