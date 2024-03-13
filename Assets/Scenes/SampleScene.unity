@@ -430,14 +430,13 @@ GameObject:
   m_Component:
   - component: {fileID: 196605458}
   - component: {fileID: 196605460}
-  - component: {fileID: 196605459}
   m_Layer: 0
   m_Name: Parry Window
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &196605458
 Transform:
   m_ObjectHideFlags: 0
@@ -453,20 +452,6 @@ Transform:
   m_Father: {fileID: 2128829801}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &196605459
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 196605457}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b51d710876694742af10245895034db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parryCollider: {fileID: 196605460}
-  parryForce: 100
 --- !u!70 &196605460
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -1549,8 +1534,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1251809459}
   - component: {fileID: 1251809460}
+  - component: {fileID: 1251809461}
   m_Layer: 0
-  m_Name: PlayerMovement
+  m_Name: PlayerBehaviors
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1586,7 +1572,25 @@ MonoBehaviour:
   rb: {fileID: 0}
   jumpForce: 7
   isJump: 0
-  numberOfJump: 2
+  numberOfJump: 6
+  parryCollider: {fileID: 1251809461}
+  parryForce: 10
+--- !u!70 &1251809461
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1251809458}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.06725407, y: 1.1788976}
+  m_Size: {x: 2.2020864, y: 2.2020864}
+  m_Direction: 0
 --- !u!1 &1368261988
 GameObject:
   m_ObjectHideFlags: 0

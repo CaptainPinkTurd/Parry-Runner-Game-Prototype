@@ -4,39 +4,55 @@ using UnityEngine;
 
 public class PlayerCtrl : MonoBehaviour
 {
-    [SerializeField] PlayerJumpController playerController { get; set; }
+    [SerializeField] PlayerBehaviors playerBehavior { get; set; }
     [SerializeField] PlayerAnimationScript playerAnimation { get; set; }
-    [SerializeField] ParryScript playerParry { get; set; }
     // Start is called before the first frame update
     void Start()
     {
-        playerController = GetComponentInChildren<PlayerJumpController>();   
+        playerBehavior = GetComponentInChildren<PlayerBehaviors>();   
         playerAnimation = GetComponentInChildren<PlayerAnimationScript>();
-        playerParry = GetComponentInChildren<ParryScript>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (playerController.isJump)
+        playerBehavior.CheckForJump();
+        playerBehavior.CheckForParry();
+        PlayAnimations();   
+    }
+    private void FixedUpdate()
+    {
+        playerBehavior.Jump();
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        PlayerLanding();
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enemy"))
+        {
+            playerBehavior.Parry(collision);
+        }
+    }
+    private void PlayAnimations()
+    {
+        if (playerBehavior.isJump)
         {
             playerAnimation.JumpAnimationOn();
         }
-        if (playerParry.isParry)
+        if (playerBehavior.isParry)
         {
             playerAnimation.ParryAnimationOn();
         }
         else
         {
-            playerAnimation.ParryAnimationOff(); 
+            playerAnimation.ParryAnimationOff();
         }
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void PlayerLanding()
     {
-        if (playerController != null)
-        {
-            playerController.JumpRefresh();
-            playerAnimation.JumpAnimationOff();
-        }
+        playerBehavior.JumpRefresh();
+        playerAnimation.JumpAnimationOff();
     }
 }
