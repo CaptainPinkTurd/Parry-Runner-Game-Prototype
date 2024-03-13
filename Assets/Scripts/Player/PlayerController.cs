@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCtrl : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     [SerializeField] PlayerBehaviors playerBehavior { get; set; }
     [SerializeField] PlayerAnimationScript playerAnimation { get; set; }

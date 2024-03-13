@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerBehaviors : MonoBehaviour
+public class PlayerBehaviors : SaiMonoBehavior
 {
     [Header("Jump Mechanic")]
     [SerializeField] Rigidbody2D rb;
@@ -15,15 +15,11 @@ public class PlayerBehaviors : MonoBehaviour
     [SerializeField] float parryForce;
     internal bool isParry;
 
-    void Reset()
+    protected override void LoadComponentsAndValues()
     {
         //Load all components in script when game start
         LoadJumpComponents();
         LoadParryComponents();
-    }
-    private void Start()
-    {
-        Reset();
     }
 
     #region Jump Behavior Methods
@@ -82,7 +78,7 @@ public class PlayerBehaviors : MonoBehaviour
     }
     private void LoadParryComponents()
     {
-        parryCollider = GetComponent<Collider2D>();
+        parryCollider = GameObject.Find("Parry Window").GetComponent<Collider2D>();
         parryForce = 50;
     }
     #endregion
