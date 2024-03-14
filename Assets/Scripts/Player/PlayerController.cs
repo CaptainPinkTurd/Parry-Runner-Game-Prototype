@@ -4,25 +4,27 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] PlayerBehaviors playerBehavior { get; set; }
+    [SerializeField] PlayerJump playerJump { get; set; }
+    [SerializeField] PlayerParry playerParry { get; set; }
     [SerializeField] PlayerAnimationScript playerAnimation { get; set; }
     // Start is called before the first frame update
     void Start()
     {
-        playerBehavior = GetComponentInChildren<PlayerBehaviors>();   
+        playerJump = GetComponentInChildren<PlayerJump>();
+        playerParry = GetComponentInChildren<PlayerParry>();
         playerAnimation = GetComponentInChildren<PlayerAnimationScript>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        playerBehavior.CheckForJump();
-        playerBehavior.CheckForParry();
+        playerJump.CheckForJump();
+        playerParry.CheckForParry();
         PlayAnimations();   
     }
     private void FixedUpdate()
     {
-        playerBehavior.Jump();
+        playerJump.Jump();
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -32,16 +34,16 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            playerBehavior.Parry(collision);
+            playerParry.Parry(collision);
         }
     }
     private void PlayAnimations()
     {
-        if (playerBehavior.isJump)
+        if (playerJump.isJump)
         {
             playerAnimation.JumpAnimationOn();
         }
-        if (playerBehavior.isParry)
+        if (playerParry.isParry)
         {
             playerAnimation.ParryAnimationOn();
         }
@@ -52,7 +54,7 @@ public class PlayerController : MonoBehaviour
     }
     private void PlayerLanding()
     {
-        playerBehavior.JumpRefresh();
+        playerJump.JumpRefresh();
         playerAnimation.JumpAnimationOff();
     }
 }
