@@ -28,4 +28,12 @@ public class PlayerAnimationScript : MonoBehaviour
     {
         animator.SetBool("IsParry", false);
     }
+    internal void RollAnimationOn()
+    {
+        animator.SetBool("IsRoll", true);
+    }
+    internal void RollAnimationOff()
+    {
+        animator.SetBool("IsRoll", false);
+    }
 }

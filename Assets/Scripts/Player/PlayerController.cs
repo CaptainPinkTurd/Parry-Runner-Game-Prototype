@@ -7,12 +7,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] PlayerJump playerJump { get; set; }
     [SerializeField] PlayerParry playerParry { get; set; }
     [SerializeField] PlayerAnimationScript playerAnimation { get; set; }
+    [SerializeField] PlayerRoll playerRoll { get; set; }
     // Start is called before the first frame update
     void Start()
     {
         playerJump = GetComponentInChildren<PlayerJump>();
         playerParry = GetComponentInChildren<PlayerParry>();
         playerAnimation = GetComponentInChildren<PlayerAnimationScript>();
+        playerRoll = GetComponentInChildren<PlayerRoll>();      
     }
 
     // Update is called once per frame
