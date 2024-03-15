@@ -9,12 +9,15 @@ public class PlayerRoll : SaiMonoBehavior
     [SerializeField] float rollSpeed;
     public bool isRolling = false;
     public bool isRight = false;
+    public bool canRoll = false;
+    public float rayDistance = 1f;
+    public int layerMask;
 
     [SerializeField] PlayerAnimationScript animation;
     // Start is called before the first frame update
     void Start()
     {
-    
+        layerMask = 1 << 6;
     }
 
     private void Update()
@@ -30,22 +33,26 @@ public class PlayerRoll : SaiMonoBehavior
     {
         if (Input.GetKey(KeyCode.D))
         {
-            animation.RollAnimationOn();
-            isRolling = true;
             isRight = true;
-        }
-        else if (Input.GetKey(KeyCode.A))
-        {
-            animation.RollAnimationOn();
             isRolling = true;
-            isRight = false;
         }
+        if (Input.GetKey(KeyCode.A))
+        {
+            isRight = false;
+            isRolling = true;
+        }
+        canRoll = CanRoll();
     }
 
     private void RollLeft()
     {
-        if (isRolling && !isRight)
+        if (!canRoll)
         {
+            StopRolling();
+        }
+        if (isRolling && !isRight && canRoll)
+        {
+            animation.RollAnimationOn();
             transform.parent.Translate(Vector2.left * rollSpeed * Time.deltaTime);
             rollSpeed -= rollSpeed * 20f * Time.deltaTime;
             if (rollSpeed <= 5f)
@@ -57,8 +64,13 @@ public class PlayerRoll : SaiMonoBehavior
 
     protected virtual void RollRight()
     {
-        if (isRolling && isRight)
+        if (!canRoll)
         {
+            StopRolling();
+        }
+        if (isRolling && isRight && canRoll)
+        {
+            animation.RollAnimationOn();
             transform.parent.Translate(Vector2.right * rollSpeed * Time.deltaTime);
             rollSpeed -= rollSpeed * 20f * Time.deltaTime;
             if (rollSpeed <= 5f)
@@ -66,6 +78,12 @@ public class PlayerRoll : SaiMonoBehavior
                 StopRolling();
             }
         }
+    }
+    private bool CanRoll()
+    {
+        if (isRight) return Physics2D.Raycast(transform.position, Vector2.right, rayDistance, layerMask).collider == null;
+
+        return Physics2D.Raycast(transform.position, Vector2.left, rayDistance, layerMask).collider == null;
     }
     internal virtual void StopRolling()
     {
