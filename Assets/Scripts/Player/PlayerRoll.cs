@@ -5,90 +5,72 @@ using UnityEngine;
 
 public class PlayerRoll : SaiMonoBehavior
 {
-    [SerializeField] Rigidbody2D rb;
-    [SerializeField] float rollSpeed;
-    public bool isRolling = false;
-    public bool isRight = false;
-    public bool canRoll = false;
-    public float rayDistance = 1f;
-    public int layerMask;
+    [SerializeField] protected List<Transform> rollPos;
+    internal bool isRolling = false;
+    private int rollDir = 0;
 
-    [SerializeField] PlayerAnimationScript animation;
-    // Start is called before the first frame update
-    void Start()
+    protected override void LoadComponentsAndValues()
     {
-        layerMask = 1 << 6;
+        LoadRollComponents();
     }
-
-    private void Update()
+    private void LoadRollComponents()
     {
-        CheckForRoll();
-    }
-    private void FixedUpdate()
-    {
-        RollRight();
-        RollLeft(); 
-    }
-    protected virtual void CheckForRoll()
-    {
-        if (Input.GetKey(KeyCode.D))
+        rollDir = 0;
+        if (rollPos != null) return; 
+        Transform rollPosObj = GameObject.Find("Roll Positions").GetComponent<Transform>();  
+        foreach(Transform t in rollPosObj)
         {
-            isRight = true;
+            this.rollPos.Add(t);
+        }
+    }
+
+    internal virtual void CheckForRoll()
+    {
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            rollDir++;
+            CheckRollLimit();
             isRolling = true;
         }
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.A))
         {
-            isRight = false;
+            rollDir--;
+            CheckRollLimit();
             isRolling = true;
         }
-        canRoll = CanRoll();
     }
 
-    private void RollLeft()
+    internal virtual void Roll()
     {
-        if (!canRoll)
-        {
-            StopRolling();
-        }
-        if (isRolling && !isRight && canRoll)
-        {
-            animation.RollAnimationOn();
-            transform.parent.Translate(Vector2.left * rollSpeed * Time.deltaTime);
-            rollSpeed -= rollSpeed * 20f * Time.deltaTime;
-            if (rollSpeed <= 5f)
-            {
-                StopRolling();
-            }
-        }
-    }
+        if (!isRolling) return;
 
-    protected virtual void RollRight()
-    {
-        if (!canRoll)
-        {
-            StopRolling();
-        }
-        if (isRolling && isRight && canRoll)
-        {
-            animation.RollAnimationOn();
-            transform.parent.Translate(Vector2.right * rollSpeed * Time.deltaTime);
-            rollSpeed -= rollSpeed * 20f * Time.deltaTime;
-            if (rollSpeed <= 5f)
-            {
-                StopRolling();
-            }
-        }
-    }
-    private bool CanRoll()
-    {
-        if (isRight) return Physics2D.Raycast(transform.position, Vector2.right, rayDistance, layerMask).collider == null;
+        transform.parent.position = Vector2.MoveTowards(
+            transform.parent.position, rollPos[rollDir].transform.position, Time.deltaTime * 100);
 
-        return Physics2D.Raycast(transform.position, Vector2.left, rayDistance, layerMask).collider == null;
+        StopRolling();
     }
-    internal virtual void StopRolling()
+    protected virtual void StopRolling()
     {
-        isRolling = false;
-        rollSpeed = 100;
-        animation.RollAnimationOff();
+        if (transform.parent.position == rollPos[rollDir].transform.position)
+        {
+            isRolling = false;
+        }
     }
+    private void CheckRollLimit()
+    {
+        if(rollDir > rollPos.Count - 1)
+        {
+            rollDir = rollPos.Count - 1;
+        }
+        if(rollDir < 0)
+        {
+            rollDir = 0;
+        }
+    }
+    //private bool CanRoll()
+    //{
+    //    if (isRight) return Physics2D.Raycast(transform.position, Vector2.right, rayDistance, layerMask).collider == null;
+
+    //    return Physics2D.Raycast(transform.position, Vector2.left, rayDistance, layerMask).collider == null;
+    //}
 }

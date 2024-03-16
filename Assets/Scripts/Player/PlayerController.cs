@@ -22,11 +22,14 @@ public class PlayerController : MonoBehaviour
     {
         playerJump.CheckForJump();
         playerParry.CheckForParry();
+        playerRoll.CheckForRoll();
+
         PlayAnimations();   
     }
     private void FixedUpdate()
     {
         playerJump.Jump();
+        playerRoll.Roll();
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -41,22 +44,30 @@ public class PlayerController : MonoBehaviour
     }
     private void PlayAnimations()
     {
-        if (playerJump.isJump)
+        if (playerJump.isJump) //activate jump animation
         {
             playerAnimation.JumpAnimationOn();
         }
-        if (playerParry.isParry)
+        if (playerParry.isParry) //activate parry animation
         {
             playerAnimation.ParryAnimationOn();
         }
-        else
+        else //deactivate parry animation
         {
             playerAnimation.ParryAnimationOff();
+        }
+        if (playerRoll.isRolling) //activate roll animation
+        {
+            playerAnimation.RollAnimationOn();
+        }
+        else //deactivate roll animation
+        {
+            playerAnimation.RollAnimationOff();
         }
     }
     private void PlayerLanding()
     {
         playerJump.JumpRefresh();
-        playerAnimation.JumpAnimationOff();
+        playerAnimation.JumpAnimationOff(); //deactivate jump animation
     }
 }
