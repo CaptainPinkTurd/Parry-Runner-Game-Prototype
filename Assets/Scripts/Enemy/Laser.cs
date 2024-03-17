@@ -7,6 +7,7 @@ public class Laser : MonoBehaviour
     [SerializeField] LineRenderer line;
     [SerializeField] Transform firePoint;
     [SerializeField] Transform target;
+    [SerializeField] PlayerController playerController;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +34,7 @@ public class Laser : MonoBehaviour
             DisableLaser();
             return;
         }
+        if (hit.collider.gameObject.CompareTag("Player")) playerController.playerDeath.isDead = true;
         EnableLaser();
         line.SetPosition(1, hit.point);
     }

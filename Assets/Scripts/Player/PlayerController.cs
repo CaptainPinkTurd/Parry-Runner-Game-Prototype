@@ -1,73 +1,58 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : SaiMonoBehavior
 {
-    [SerializeField] PlayerJump playerJump { get; set; }
-    [SerializeField] PlayerParry playerParry { get; set; }
-    [SerializeField] PlayerAnimationScript playerAnimation { get; set; }
-    [SerializeField] PlayerRoll playerRoll { get; set; }
+    [SerializeField] internal PlayerJump playerJump;
+    [SerializeField] internal PlayerParry playerParry;
+    [SerializeField] internal PlayerAnimationScript playerAnimation;
+    [SerializeField] internal PlayerRoll playerRoll; 
+    [SerializeField] internal PlayerDeath playerDeath;
     // Start is called before the first frame update
-    void Start()
+    protected override void LoadComponentsAndValues()
     {
-        playerJump = GetComponentInChildren<PlayerJump>();
-        playerParry = GetComponentInChildren<PlayerParry>();
-        playerAnimation = GetComponentInChildren<PlayerAnimationScript>();
-        playerRoll = GetComponentInChildren<PlayerRoll>();      
+        LoadPlayerBehaviors();
     }
 
     // Update is called once per frame
     void Update()
     {
+        CheckForPlayerInput();
+
+        playerAnimation.PlayAnimations();   
+    }
+
+    private void FixedUpdate()
+    {
+        PlayerBehaviors();
+    }
+
+    private void CheckForPlayerInput()
+    {
         playerJump.CheckForJump();
         playerParry.CheckForParry();
         playerRoll.CheckForRoll();
-
-        PlayAnimations();   
     }
-    private void FixedUpdate()
+    private void PlayerBehaviors()
     {
         playerJump.Jump();
         playerRoll.Roll();
+        playerDeath.OnDeath();
     }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        PlayerLanding();
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Enemy"))
-        {
-            playerParry.Parry(collision);
-        }
-    }
-    private void PlayAnimations()
-    {
-        if (playerJump.isJump) //activate jump animation
-        {
-            playerAnimation.JumpAnimationOn();
-        }
-        if (playerParry.isParry) //activate parry animation
-        {
-            playerAnimation.ParryAnimationOn();
-        }
-        else //deactivate parry animation
-        {
-            playerAnimation.ParryAnimationOff();
-        }
-        if (playerRoll.isRolling) //activate roll animation
-        {
-            playerAnimation.RollAnimationOn();
-        }
-        else //deactivate roll animation
-        {
-            playerAnimation.RollAnimationOff();
-        }
-    }
-    private void PlayerLanding()
+    
+    internal void PlayerLanding()
     {
         playerJump.JumpRefresh();
         playerAnimation.JumpAnimationOff(); //deactivate jump animation
+    }
+    private void LoadPlayerBehaviors()
+    {
+        playerJump = GetComponentInChildren<PlayerJump>();
+        playerParry = GetComponentInChildren<PlayerParry>();
+        playerAnimation = GetComponentInChildren<PlayerAnimationScript>();
+        playerRoll = GetComponentInChildren<PlayerRoll>();
+        playerDeath = GetComponentInChildren<PlayerDeath>();
     }
 }

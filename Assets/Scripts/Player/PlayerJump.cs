@@ -7,8 +7,8 @@ public class PlayerJump : SaiMonoBehavior
     [Header("Jump Mechanic")]
     [SerializeField] Rigidbody2D rb;
     [SerializeField] float jumpForce;
-    [SerializeField] internal bool isJump = false;
-    [SerializeField] int numberOfJump;
+    private int numberOfJump;
+    internal bool isJump = false;
 
     protected override void LoadComponentsAndValues()
     {

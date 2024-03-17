@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAnimationScript : MonoBehaviour
+public class PlayerAnimationScript : SaiMonoBehavior
 {
-    [Header("Animations")]
+    [SerializeField] PlayerController playerController;
     private Animator animator;
-    // Start is called before the first frame update
-    void Start()
+    protected override void LoadComponentsAndValues()
     {
-        animator = GetComponent<Animator>();        
+        animator = GetComponent<Animator>();    
+        playerController = GetComponentInParent<PlayerController>();    
     }
 
     internal void JumpAnimationOn()
@@ -35,5 +35,28 @@ public class PlayerAnimationScript : MonoBehaviour
     internal void RollAnimationOff()
     {
         animator.SetBool("IsRoll", false);
+    }
+    internal void PlayAnimations()
+    {
+        if (playerController.playerJump.isJump) //activate jump animation
+        {
+            JumpAnimationOn();
+        }
+        if (playerController.playerParry.isParry) //activate parry animation
+        {
+            ParryAnimationOn();
+        }
+        else //deactivate parry animation
+        {
+            ParryAnimationOff();
+        }
+        if (playerController.playerRoll.isRolling) //activate roll animation
+        {
+            RollAnimationOn();
+        }
+        else //deactivate roll animation
+        {
+            RollAnimationOff();
+        }
     }
 }

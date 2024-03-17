@@ -1375,6 +1375,7 @@ MonoBehaviour:
   line: {fileID: 559953685}
   firePoint: {fileID: 1015348383}
   target: {fileID: 2128829801}
+  playerController: {fileID: 2128829804}
 --- !u!1 &749863057
 GameObject:
   m_ObjectHideFlags: 0
@@ -1705,7 +1706,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1131597105
 Transform:
   m_ObjectHideFlags: 0
@@ -1965,6 +1966,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0404bc79c5b844d4a962ce1d2951acb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerController: {fileID: 0}
 --- !u!1 &1251809458
 GameObject:
   m_ObjectHideFlags: 0
@@ -1977,6 +1979,7 @@ GameObject:
   - component: {fileID: 1251809460}
   - component: {fileID: 1251809461}
   - component: {fileID: 1251809462}
+  - component: {fileID: 1251809463}
   m_Layer: 0
   m_Name: PlayerBehaviors
   m_TagString: Untagged
@@ -2013,8 +2016,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 2128829802}
   jumpForce: 7
-  isJump: 0
-  numberOfJump: 2
 --- !u!114 &1251809461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2045,6 +2046,22 @@ MonoBehaviour:
   - {fileID: 2067982471}
   - {fileID: 1837356916}
   - {fileID: 1492667908}
+--- !u!114 &1251809463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1251809458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9f8d7c75b501954c86fb46dbd680590, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerController: {fileID: 2128829804}
+  movingBackground: {fileID: 282169038}
+  enemySpawner: {fileID: 1131597104}
+  isDead: 0
 --- !u!1 &1323923405
 GameObject:
   m_ObjectHideFlags: 0
@@ -2677,9 +2694,10 @@ GameObject:
   - component: {fileID: 2128829803}
   - component: {fileID: 2128829802}
   - component: {fileID: 2128829804}
+  - component: {fileID: 2128829805}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2752,3 +2770,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 126b9e3ed6c1fc04983e21ef10baad94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerJump: {fileID: 0}
+  playerParry: {fileID: 0}
+  playerAnimation: {fileID: 0}
+  playerRoll: {fileID: 0}
+  playerDeath: {fileID: 0}
+--- !u!114 &2128829805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2128829800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1432726ff0351ac40a79b5937f61d772, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerController: {fileID: 2128829804}
