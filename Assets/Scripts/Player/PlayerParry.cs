@@ -8,6 +8,8 @@ public class PlayerParry : SaiMonoBehavior
     [SerializeField] Collider2D parryCollider;
     [SerializeField] float parryForce;
     internal bool isParry;
+    internal bool isCounter;
+    [SerializeField] float parryDuration;
 
     protected override void LoadComponentsAndValues()
     {
@@ -18,28 +20,40 @@ public class PlayerParry : SaiMonoBehavior
     {
         parryCollider = GameObject.Find("Parry Window").GetComponent<Collider2D>();
         parryForce = 50;
+        isParry = false;
+        isCounter = false;
     }
     internal void CheckForParry()
     {
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            isParry = true;
-            parryCollider.enabled = true;
-        }
-        else
-        {
-            isParry = false;
-            parryCollider.enabled = false;
+            StartCoroutine(ParryState());
         }
     }
-    internal void Parry(Collider2D collision)
+    protected IEnumerator ParryState()
     {
+        isParry = true;
+        parryCollider.enabled = true;
+        yield return new WaitForSeconds(parryDuration);
+        parryCollider.enabled = false;
+        isParry = false;
+    }
+    internal IEnumerator Parry(Collider2D collision)
+    {
+        Physics2D.IgnoreLayerCollision(6, 7, true);
+        yield return new WaitForSeconds(0.09f);
+        isCounter = true;
         print("Parry");
+        HitStop.instance.Stop(0.18f);
+        yield return new WaitForSeconds(0.09f);
         Rigidbody2D enemyRb = collision.GetComponent<Rigidbody2D>();
         //collision.GetComponentInChildren<MoveLeft>().enabled = false; 
         Vector2 enemyDir = enemyRb.transform.position - transform.parent.position;
 
         enemyRb.AddForce(enemyDir.normalized * parryForce, ForceMode2D.Impulse);
         enemyRb.AddTorque(parryForce, ForceMode2D.Impulse);
+        yield return new WaitForSeconds(0.1f);
+        Physics2D.IgnoreLayerCollision(6, 7, false);
+        isCounter = false;
     }
 }

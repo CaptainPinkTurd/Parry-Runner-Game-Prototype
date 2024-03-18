@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerCollision : SaiMonoBehavior
 {
     [SerializeField] PlayerController playerController;
+    private int enemyLayer = 7;
     protected override void LoadComponentsAndValues()
     {
         playerController = GetComponentInParent<PlayerController>();        
@@ -12,16 +13,17 @@ public class PlayerCollision : SaiMonoBehavior
     private void OnCollisionEnter2D(Collision2D collision)
     {
         playerController.PlayerLanding();
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.layer == enemyLayer)
         {
+            print("You die");
             playerController.playerDeath.isDead = true;
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy"))
+        if (collision.gameObject.layer == enemyLayer)
         {
-            playerController.playerParry.Parry(collision);
+            StartCoroutine(playerController.playerParry.Parry(collision));
         }
     }
 }

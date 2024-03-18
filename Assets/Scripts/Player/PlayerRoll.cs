@@ -41,7 +41,8 @@ public class PlayerRoll : SaiMonoBehavior
         }
     }
 
-    internal virtual void Roll()
+    internal virtual void Roll() 
+        //this thing move towards and ignore every collider on its way to the target position
     {
         if (!isRolling) return;
 

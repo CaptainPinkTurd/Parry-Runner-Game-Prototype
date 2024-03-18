@@ -36,6 +36,14 @@ public class PlayerAnimationScript : SaiMonoBehavior
     {
         animator.SetBool("IsRoll", false);
     }
+    internal void CounterAttackAnimationOn()
+    {
+        animator.SetBool("IsCounter", true);
+    }
+    internal void CounterAttackAnimationOff()
+    {
+        animator.SetBool("IsCounter", false);
+    }
     internal void PlayAnimations()
     {
         if (playerController.playerJump.isJump) //activate jump animation
@@ -45,10 +53,15 @@ public class PlayerAnimationScript : SaiMonoBehavior
         if (playerController.playerParry.isParry) //activate parry animation
         {
             ParryAnimationOn();
+            if (playerController.playerParry.isCounter)
+            {
+                CounterAttackAnimationOn();
+            }
         }
         else //deactivate parry animation
         {
             ParryAnimationOff();
+            CounterAttackAnimationOff();
         }
         if (playerController.playerRoll.isRolling) //activate roll animation
         {
