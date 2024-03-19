@@ -5,11 +5,13 @@ using UnityEngine;
 
 public class PlayerController : SaiMonoBehavior
 {
+    [SerializeField] internal Rigidbody2D playerRb;
     [SerializeField] internal PlayerJump playerJump;
     [SerializeField] internal PlayerParry playerParry;
     [SerializeField] internal PlayerAnimationScript playerAnimation;
     [SerializeField] internal PlayerRoll playerRoll; 
     [SerializeField] internal PlayerDeath playerDeath;
+    [SerializeField] internal PlayerCollision playerCollision;
     // Start is called before the first frame update
     protected override void LoadComponentsAndValues()
     {
@@ -54,5 +56,7 @@ public class PlayerController : SaiMonoBehavior
         playerAnimation = GetComponentInChildren<PlayerAnimationScript>();
         playerRoll = GetComponentInChildren<PlayerRoll>();
         playerDeath = GetComponentInChildren<PlayerDeath>();
+        playerCollision = GetComponent<PlayerCollision>();
+        playerRb = GetComponent<Rigidbody2D>();
     }
 }

@@ -2044,6 +2044,7 @@ MonoBehaviour:
   parryCollider: {fileID: 196605460}
   parryForce: 50
   parryDuration: 0.25
+  playerController: {fileID: 2128829804}
 --- !u!114 &1251809462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2783,11 +2784,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 126b9e3ed6c1fc04983e21ef10baad94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerRb: {fileID: 0}
   playerJump: {fileID: 0}
   playerParry: {fileID: 0}
   playerAnimation: {fileID: 0}
   playerRoll: {fileID: 0}
   playerDeath: {fileID: 0}
+  playerCollision: {fileID: 0}
 --- !u!114 &2128829805
 MonoBehaviour:
   m_ObjectHideFlags: 0
