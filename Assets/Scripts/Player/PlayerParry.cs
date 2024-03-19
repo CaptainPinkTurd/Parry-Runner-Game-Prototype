@@ -33,9 +33,14 @@ public class PlayerParry : SaiMonoBehavior
     }
     protected IEnumerator ParryState()
     {
-        isParry = true;
+        isParry = true; //cue for parry animation
+
+        yield return new WaitForSeconds(0.1f); //time for parry animation to finish
+
         parryCollider.enabled = true;
+
         yield return new WaitForSeconds(parryDuration);
+
         parryCollider.enabled = false;
         isParry = false;
     }
@@ -45,14 +50,12 @@ public class PlayerParry : SaiMonoBehavior
         playerController.playerCollision.allowCollision = true; //player become immune to enemy
         playerController.playerRb.constraints = RigidbodyConstraints2D.FreezeAll;
 
-        yield return new WaitForSeconds(0.09f);
-
         //Phase 2: initiating the attack animation and stopping the game for a moment to emphasize the effect
         isCounter = true; //cue for counter attack animation
         HitStop.instance.Stop(0.125f);
 
         yield return new WaitForSeconds(0.09f);
-        
+
         //Phase 3: obliterating the enemy
         Rigidbody2D enemyRb = collision.GetComponent<Rigidbody2D>();
         Vector2 enemyDir = enemyRb.transform.position - transform.parent.position;
