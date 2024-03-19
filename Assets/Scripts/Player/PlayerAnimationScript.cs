@@ -36,9 +36,11 @@ public class PlayerAnimationScript : SaiMonoBehavior
     {
         animator.SetBool("IsRoll", false);
     }
-    internal void CounterAttackAnimationOn()
+    internal IEnumerator CounterAttackAnimationOn()
     {
         animator.SetTrigger("IsCounter");
+        yield return new WaitForSeconds(0.5f);
+        animator.ResetTrigger("IsCounter");
     }
     internal void DeathAnimationOn()
     {
@@ -55,7 +57,7 @@ public class PlayerAnimationScript : SaiMonoBehavior
             ParryAnimationOn();
             if (playerController.playerParry.isCounter)
             {
-                CounterAttackAnimationOn();
+                StartCoroutine(CounterAttackAnimationOn());
             }
         }
         else //deactivate parry animation

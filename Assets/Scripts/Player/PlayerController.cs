@@ -33,9 +33,10 @@ public class PlayerController : SaiMonoBehavior
 
     private void CheckForPlayerInput()
     {
+        if (playerParry.isParry) return;
         playerJump.CheckForJump();
-        playerParry.CheckForParry();
         playerRoll.CheckForRoll();
+        playerParry.CheckForParry();
     }
     private void PlayerBehaviors()
     {

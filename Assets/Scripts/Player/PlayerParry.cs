@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 public class PlayerParry : SaiMonoBehavior
 {
@@ -26,7 +27,7 @@ public class PlayerParry : SaiMonoBehavior
     }
     internal void CheckForParry()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && !isParry)
         {
             StartCoroutine(ParryState());
         }
@@ -42,6 +43,8 @@ public class PlayerParry : SaiMonoBehavior
         yield return new WaitForSeconds(parryDuration);
 
         parryCollider.enabled = false;
+
+        yield return new WaitForSeconds(0.65f);
         isParry = false;
     }
     internal IEnumerator Parry(Collider2D collision)
@@ -52,6 +55,7 @@ public class PlayerParry : SaiMonoBehavior
 
         //Phase 2: initiating the attack animation and stopping the game for a moment to emphasize the effect
         isCounter = true; //cue for counter attack animation
+        print("Parry");
         HitStop.instance.Stop(0.125f);
 
         yield return new WaitForSeconds(0.09f);
@@ -61,12 +65,13 @@ public class PlayerParry : SaiMonoBehavior
         Vector2 enemyDir = enemyRb.transform.position - transform.parent.position;
         enemyRb.AddForce(enemyDir.normalized * parryForce, ForceMode2D.Impulse);
         enemyRb.AddTorque(parryForce, ForceMode2D.Impulse);
-        
+        isCounter = false;
+
         yield return new WaitForSeconds(0.1f);
 
         //Phase 4: setting every conditions back to normal
         playerController.playerRb.constraints &= ~RigidbodyConstraints2D.FreezePositionY; //disable freeze pos at y
         playerController.playerCollision.allowCollision = false;
-        isCounter = false;
+        isParry = false;
     }
 }

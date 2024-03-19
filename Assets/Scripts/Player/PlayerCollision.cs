@@ -16,7 +16,6 @@ public class PlayerCollision : SaiMonoBehavior
         playerController.PlayerLanding();
         if (collision.gameObject.layer == enemyLayer && !allowCollision)
         {
-            print("You die");
             playerController.playerDeath.isDead = true;
         }
     }

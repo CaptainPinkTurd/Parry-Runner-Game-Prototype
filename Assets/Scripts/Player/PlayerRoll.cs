@@ -8,7 +8,7 @@ public class PlayerRoll : SaiMonoBehavior
     [SerializeField] protected List<Transform> rollPos;
     internal bool isRolling = false;
     private int rollDir = 0;
-    private int rollSpeed = 100;
+    [SerializeField] float rollSpeed = 1;
 
     protected override void LoadComponentsAndValues()
     {
@@ -46,8 +46,9 @@ public class PlayerRoll : SaiMonoBehavior
     {
         if (!isRolling) return;
 
+        Physics2D.IgnoreLayerCollision(6, 7, true);
         transform.parent.position = Vector2.MoveTowards(
-            transform.parent.position, rollPos[rollDir].transform.position, Time.deltaTime * rollSpeed);
+            transform.parent.position, rollPos[rollDir].transform.position, rollSpeed);
 
         StopRolling();
     }
@@ -56,6 +57,7 @@ public class PlayerRoll : SaiMonoBehavior
         if (transform.parent.position == rollPos[rollDir].transform.position)
         {
             isRolling = false;
+            Physics2D.IgnoreLayerCollision(6, 7, false);
         }
     }
     private void CheckRollLimit()

@@ -23,7 +23,7 @@ public class EnemySpawner : Spawner
     {
         while (true)
         {
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(2f);
             Vector2 spawnPos = new Vector2(Random.Range(15, 17), Random.Range(-4, 4));
             Quaternion rotation = Quaternion.identity;
             Transform newEnemy = Spawner.instance.Spawn(spawnPos, rotation);
