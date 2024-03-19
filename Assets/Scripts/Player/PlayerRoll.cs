@@ -27,6 +27,8 @@ public class PlayerRoll : SaiMonoBehavior
 
     internal virtual void CheckForRoll()
     {
+        if (isRolling) return; 
+
         if (Input.GetKeyDown(KeyCode.D))
         {
             rollDir++;
