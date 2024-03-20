@@ -6,7 +6,6 @@ using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCou
 public class PlayerParry : SaiMonoBehavior
 {
     [Header("Parry Mechanic")]
-    [SerializeField]  PlayerController playerController;
     [SerializeField] Collider2D parryCollider;
     [SerializeField] float parryForce;
     [SerializeField] float parryDuration;
@@ -21,7 +20,6 @@ public class PlayerParry : SaiMonoBehavior
     }
     private void LoadParryComponents()
     {
-        parryCollider = GameObject.Find("Parry Window").GetComponent<Collider2D>();
         parryForce = 50;
         isParry = false;
         isCounter = false;
@@ -53,8 +51,8 @@ public class PlayerParry : SaiMonoBehavior
         if (collision.gameObject.layer == enemyLayer)
         {
             //Phase 1: setting up player conditions for parry
-            playerController.playerCollision.allowCollision = true; //player become immune to enemy
-            playerController.playerRb.constraints = RigidbodyConstraints2D.FreezeAll;
+            PlayerController.instance.playerCollision.allowCollision = true; //player become immune to enemy
+            PlayerController.instance.playerRb.constraints = RigidbodyConstraints2D.FreezeAll;
 
             //Phase 2: initiating the attack animation and stopping the game for a moment to emphasize the effect
             isCounter = true; //cue for counter attack animation
@@ -73,8 +71,8 @@ public class PlayerParry : SaiMonoBehavior
             yield return new WaitForSeconds(0.1f);
 
             //Phase 4: setting every conditions back to normal
-            playerController.playerRb.constraints &= ~RigidbodyConstraints2D.FreezePositionY; //disable freeze pos at y
-            playerController.playerCollision.allowCollision = false;
+            PlayerController.instance.playerRb.constraints &= ~RigidbodyConstraints2D.FreezePositionY; //disable freeze pos at y
+            PlayerController.instance.playerCollision.allowCollision = false;
             isParry = false;
         }
     }

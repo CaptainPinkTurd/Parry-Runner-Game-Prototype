@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class PlayerController : SaiMonoBehavior
 {
+    public static PlayerController instance;    
+
     [SerializeField] internal Rigidbody2D playerRb;
     [SerializeField] internal PlayerJump playerJump;
     [SerializeField] internal PlayerParry playerParry;
@@ -52,6 +54,7 @@ public class PlayerController : SaiMonoBehavior
     }
     private void LoadPlayerBehaviors()
     {
+        instance = this;
         playerJump = GetComponentInChildren<PlayerJump>();
         playerParry = GetComponentInChildren<PlayerParry>();
         playerAnimation = GetComponentInChildren<PlayerAnimationScript>();

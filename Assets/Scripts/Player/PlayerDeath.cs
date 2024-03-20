@@ -17,7 +17,6 @@ public class PlayerDeath : SaiMonoBehavior
         if (!isDead) return;
 
         playerController.enabled = false;
-        EnemySpawner.instance.canSpawn = false;
         movingBackground.SetActive(false);  
     }
 }

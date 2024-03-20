@@ -19,6 +19,6 @@ public class MoveLeft : MonoBehaviour
     }
     protected virtual void TranslateLeft()
     {
-        transform.parent.Translate(Vector2.left * speed *  Time.deltaTime);     
+        transform.parent.Translate(Vector2.left * speed *  Time.deltaTime, Space.World);     
     }
 }
