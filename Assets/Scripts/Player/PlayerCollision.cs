@@ -21,9 +21,6 @@ public class PlayerCollision : SaiMonoBehavior
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == enemyLayer)
-        {
-            StartCoroutine(playerController.playerParry.Parry(collision));
-        }
+        StartCoroutine(playerController.playerParry.Parry(collision));
     }
 }
