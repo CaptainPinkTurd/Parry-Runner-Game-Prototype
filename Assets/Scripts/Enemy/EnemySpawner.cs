@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class EnemySpawner : Spawner
 {
-    public static EnemySpawner instance { get; private set; }
+    public static new EnemySpawner instance { get; private set; }
     public static string groundTypeEnemy = "Ground Type Enemy";
     public static string airTypeEnemy = "Air Type Enemy";
+    internal bool canSpawn;
 
     protected override void Awake()
     {
@@ -15,18 +16,20 @@ public class EnemySpawner : Spawner
         instance = this;    
     }
 
-    private void Start()
+    protected override void Start()
     {
+        canSpawn = true;
         StartCoroutine(EnemySpawn());   
     }
     protected virtual IEnumerator EnemySpawn()
     {
-        while (true)
+        while (canSpawn)
         {
             yield return new WaitForSeconds(2f);
             Vector2 spawnPos = new Vector2(Random.Range(15, 17), Random.Range(-4, 4));
             Quaternion rotation = Quaternion.identity;
-            Transform newEnemy = Spawner.instance.Spawn(spawnPos, rotation);
+            Transform enemyPrefab = GetRandomPrefab();
+            Transform newEnemy = Spawn(enemyPrefab, spawnPos, rotation);
             newEnemy.gameObject.SetActive(true);
         }
     }

@@ -18,6 +18,12 @@ public class LockOnAttack : SaiMonoBehavior
         movement = GetComponent<MoveLeft>();
         target = GameObject.Find("Player");
     }
+    private void OnEnable()
+    {
+        gameObject.GetComponentInParent<Rigidbody2D>().gravityScale = 1;
+        movement.enabled = true;
+        isAttacking = false;
+    }
 
     // Update is called once per frame
     void Update()
