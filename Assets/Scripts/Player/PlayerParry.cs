@@ -10,6 +10,7 @@ public class PlayerParry : SaiMonoBehavior
     [SerializeField] float parryForce;
     [SerializeField] float parryDuration;
     internal bool isParry;
+    internal int parryCounter = 0;
     internal bool isCounter;
     private int enemyLayer = 7;
 
@@ -56,7 +57,6 @@ public class PlayerParry : SaiMonoBehavior
 
             //Phase 2: initiating the attack animation and stopping the game for a moment to emphasize the effect
             isCounter = true; //cue for counter attack animation
-            print("Parry");
             HitStop.instance.Stop(0.125f);
 
             yield return new WaitForSeconds(0.09f);
@@ -66,6 +66,7 @@ public class PlayerParry : SaiMonoBehavior
             Vector2 enemyDir = enemyRb.transform.position - transform.parent.position;
             enemyRb.AddForce(enemyDir.normalized * parryForce, ForceMode2D.Impulse);
             enemyRb.AddTorque(parryForce, ForceMode2D.Impulse);
+            collision.gameObject.layer = 6;
             isCounter = false;
 
             yield return new WaitForSeconds(0.1f);
@@ -73,6 +74,7 @@ public class PlayerParry : SaiMonoBehavior
             //Phase 4: setting every conditions back to normal
             PlayerController.instance.playerRb.constraints &= ~RigidbodyConstraints2D.FreezePositionY; //disable freeze pos at y
             PlayerController.instance.playerCollision.allowCollision = false;
+            parryCounter++;
             isParry = false;
         }
     }

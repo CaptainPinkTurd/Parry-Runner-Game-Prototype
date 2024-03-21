@@ -8,7 +8,7 @@ public class PlayerRoll : SaiMonoBehavior
     [SerializeField] protected List<Transform> rollPos;
     internal bool isRolling = false;
     private int rollDir = 0;
-    [SerializeField] float rollSpeed = 1;
+    private float rollSpeed = 0.5f;
 
     protected override void LoadComponentsAndValues()
     {
@@ -44,7 +44,6 @@ public class PlayerRoll : SaiMonoBehavior
     }
 
     internal virtual void Roll() 
-        //this thing move towards and ignore every collider on its way to the target position
     {
         if (!isRolling) return;
 
