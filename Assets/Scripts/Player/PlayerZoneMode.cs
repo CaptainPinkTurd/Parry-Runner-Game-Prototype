@@ -24,7 +24,7 @@ public class PlayerZoneMode : MonoBehaviour
     }
     private void OnZoneModeExit()
     {
-        if (inZone) return;
+        if (inZone || PlayerController.instance.playerParry.isCounter) return;
         Time.timeScale = 1;
     }
 }
