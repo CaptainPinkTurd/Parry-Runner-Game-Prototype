@@ -1199,7 +1199,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!50 &244544278
 Rigidbody2D:
   serializedVersion: 4
@@ -2619,6 +2619,7 @@ GameObject:
   - component: {fileID: 609785447}
   - component: {fileID: 609785445}
   - component: {fileID: 609785444}
+  - component: {fileID: 609785448}
   m_Layer: 7
   m_Name: Ground Type Enemy
   m_TagString: Untagged
@@ -2691,6 +2692,18 @@ Transform:
   m_Father: {fileID: 692359374}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &609785448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 609785442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d3df6d7929639342a144d915ab59be8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &629692755
 GameObject:
   m_ObjectHideFlags: 0
@@ -2776,7 +2789,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!50 &718865838
 Rigidbody2D:
   serializedVersion: 4
@@ -3506,6 +3519,7 @@ GameObject:
   - component: {fileID: 976129328}
   - component: {fileID: 976129326}
   - component: {fileID: 976129329}
+  - component: {fileID: 976129330}
   m_Layer: 7
   m_Name: Air Type Enemy
   m_TagString: Untagged
@@ -3568,6 +3582,18 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &976129330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 976129324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d3df6d7929639342a144d915ab59be8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &984246365
 GameObject:
   m_ObjectHideFlags: 0
@@ -4064,6 +4090,7 @@ GameObject:
   - component: {fileID: 1128867185}
   - component: {fileID: 1128867184}
   - component: {fileID: 1128867183}
+  - component: {fileID: 1128867186}
   m_Layer: 7
   m_Name: Zigzag Enemy
   m_TagString: Untagged
@@ -4137,6 +4164,18 @@ Transform:
   m_Father: {fileID: 692359374}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1128867186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1128867182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d3df6d7929639342a144d915ab59be8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1131597104
 GameObject:
   m_ObjectHideFlags: 0
@@ -4153,7 +4192,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1131597105
 Transform:
   m_ObjectHideFlags: 0
@@ -4606,7 +4645,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!50 &1270350438
 Rigidbody2D:
   serializedVersion: 4
@@ -5241,7 +5280,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!50 &1468287562
 Rigidbody2D:
   serializedVersion: 4
@@ -5571,7 +5610,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!50 &1565784756
 Rigidbody2D:
   serializedVersion: 4
@@ -5962,7 +6001,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!50 &1681432240
 Rigidbody2D:
   serializedVersion: 4
@@ -6438,6 +6477,7 @@ GameObject:
   - component: {fileID: 1794796736}
   - component: {fileID: 1794796738}
   - component: {fileID: 1794796737}
+  - component: {fileID: 1794796739}
   m_Layer: 7
   m_Name: DashSquare
   m_TagString: Untagged
@@ -6511,6 +6551,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1794796739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1794796734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d3df6d7929639342a144d915ab59be8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1803223022
 GameObject:
   m_ObjectHideFlags: 0
@@ -7593,7 +7645,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!50 &2139344768
 Rigidbody2D:
   serializedVersion: 4

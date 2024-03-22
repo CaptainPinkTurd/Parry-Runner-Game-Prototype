@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,9 +12,12 @@ public class PlayerParry : SaiMonoBehavior
     [SerializeField] float parryDuration;
     private Coroutine currentParryState = null;
     internal bool isParry;
-    internal int parryCounter = 0;
     internal bool isCounter;
-    private int enemyLayer = 7;
+
+    [Header("Parry Related Conditions Variables")]
+    internal int parryCounter = 0;
+    private const int enemyLayer = 7;
+    private const int playerLayer = 6;
     private bool consecutiveParry;
 
     protected override void LoadComponentsAndValues()
@@ -31,10 +35,10 @@ public class PlayerParry : SaiMonoBehavior
     {
         if (Input.GetKeyDown(KeyCode.Space) && !isParry)
         {
-            currentParryState = StartCoroutine(ParryState());
+            currentParryState = StartCoroutine(EnterParryState());
         }
     }
-    protected IEnumerator ParryState()
+    protected IEnumerator EnterParryState()
     {
         isParry = true; //cue for parry animation
 
@@ -45,12 +49,10 @@ public class PlayerParry : SaiMonoBehavior
         yield return new WaitForSeconds(parryDuration);
 
         parryCollider.enabled = false;
-        if (!isCounter) //if isn't counter anything, then turn off consecutive parry flow
-        {
-            consecutiveParry = false;
-        }
+        if (!isCounter) consecutiveParry = false; //if isn't countering anything, then turn off consecutive parry flow
 
         yield return new WaitForSeconds(0.65f);
+
         isParry = false;
     }
     internal IEnumerator Parry(Collider2D collision)
@@ -63,10 +65,7 @@ public class PlayerParry : SaiMonoBehavior
 
         //Phase 2: initiating the attack animation and stopping the game for a moment to emphasize the effect
         isCounter = true; //cue for counter attack animation
-        if (!consecutiveParry)
-        {
-            HitStop.instance.Stop(0.125f);
-        }
+        if (!consecutiveParry) HitStop.instance.Stop(0.125f);
 
         yield return new WaitForSeconds(0.09f);
 
@@ -75,26 +74,30 @@ public class PlayerParry : SaiMonoBehavior
         Vector2 enemyDir = enemyRb.transform.position - transform.parent.position;
         enemyRb.AddForce(enemyDir.normalized * parryForce, ForceMode2D.Impulse);
         enemyRb.AddTorque(parryForce, ForceMode2D.Impulse);
-        //collision.gameObject.layer = 6;
-        isParry = false;
-        StopCoroutine(currentParryState);
-        isCounter = false;
-        parryCollider.enabled = false;
+
+        //Phase 4: setting up conditions upon exiting parry 
+        TurnOffParryConditions();
 
         yield return new WaitForSeconds(0.1f);
 
-        if (isParry)
-        {
-            print("Consecutive Parry");
-            consecutiveParry = true;
-            PlayerController.instance.playerCollision.allowCollision = false;
-            parryCounter++;
-            yield break;
-        }
-
-        //Phase 4: setting every conditions back to normal
+        CheckIfConsecutiveParry();
+        collision.gameObject.layer = playerLayer; //turn enemy into player's projectile after deflect them
         PlayerController.instance.playerRb.constraints &= ~RigidbodyConstraints2D.FreezePositionY; //disable freeze pos at y
-        PlayerController.instance.playerCollision.allowCollision = false;
+        PlayerController.instance.playerCollision.allowCollision = false; //turn on player vulnerability again
         parryCounter++;
+    }
+
+    private void TurnOffParryConditions()
+    {
+        isParry = false;
+        isCounter = false;
+        StopCoroutine(currentParryState); //stop the ongoing function of parry state, it will mess with the flow of the player functionality if left untouch 
+        parryCollider.enabled = false;
+    }
+
+    private void CheckIfConsecutiveParry()
+    {
+        if (!isParry) return;
+        consecutiveParry = true;
     }
 }

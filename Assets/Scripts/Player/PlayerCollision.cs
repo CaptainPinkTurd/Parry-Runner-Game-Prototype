@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerCollision : SaiMonoBehavior
 {
     [SerializeField] PlayerController playerController;
-    private int enemyLayer = 7;
+    private const int enemyLayer = 7;
     internal bool allowCollision;
     protected override void LoadComponentsAndValues()
     {
