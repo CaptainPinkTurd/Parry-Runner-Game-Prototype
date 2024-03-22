@@ -7,7 +7,7 @@ public class LockOnAttack : SaiMonoBehavior
     [SerializeField] MoveLeft movement;
     [SerializeField] GameObject target;
     [SerializeField] float dashSpeed;
-    [SerializeField] GameObject warning;
+    [SerializeField] Transform warning;
     private bool isLockOn;
     private bool isAttacking = false;
     private float levitateSpeed = 1.25f;
@@ -17,6 +17,8 @@ public class LockOnAttack : SaiMonoBehavior
     {
         movement = GetComponent<MoveLeft>();
         target = GameObject.Find("Player");
+        warning = transform.parent.Find("Warning");
+        dashSpeed = 50;
     }
     private void OnEnable()
     {
@@ -68,9 +70,9 @@ public class LockOnAttack : SaiMonoBehavior
     }
     private IEnumerator Alert()
     {
-        warning.SetActive(true);
+        warning.gameObject.SetActive(true);
         yield return new WaitForSeconds(0.1f);
-        warning.SetActive(false);
+        warning.gameObject.SetActive(false);
     }
     private IEnumerator SetAlert()
     {
