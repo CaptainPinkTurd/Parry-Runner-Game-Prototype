@@ -16,9 +16,18 @@ public class TargetPlayer : MonoBehaviour
     void Update()
     {
         playerDir = target.transform.position - transform.parent.position;
+        
+        if (InCameraDetector.instance.isOnScreen)
+        {
+            transform.parent.Translate(playerDir.normalized * 7f * Time.deltaTime);
+        }
+        else
+        {
+            transform.parent.Translate(playerDir.normalized * 7f * Time.unscaledDeltaTime);
+        }
     }
     private void FixedUpdate()
     {
-        transform.parent.Translate(playerDir.normalized * 7f * Time.deltaTime);
+        
     }
 }

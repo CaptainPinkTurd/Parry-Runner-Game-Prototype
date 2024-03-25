@@ -24,7 +24,7 @@ public class EnemySpawner : Spawner
     {
         while (!PlayerController.instance.playerDeath.isDead)
         {
-            spawnRate = PlayerController.instance.playerZone.inZone == true ? 0.4f : 2f;
+            spawnRate = PlayerController.instance.playerZone.inZone == true ? 0.5f : 2f;
             yield return new WaitForSeconds(spawnRate);
             Transform enemyPrefab = GetRandomPrefab();
             Quaternion rotation = Quaternion.identity;
