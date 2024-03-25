@@ -6,6 +6,7 @@ public class PlayerCollision : SaiMonoBehavior
 {
     [SerializeField] PlayerController playerController;
     private const int enemyLayer = 7;
+    private const int obstacleLayer = 8;
     internal bool allowCollision;
     protected override void LoadComponentsAndValues()
     {
@@ -14,7 +15,7 @@ public class PlayerCollision : SaiMonoBehavior
     private void OnCollisionEnter2D(Collision2D collision)
     {
         playerController.PlayerLanding();
-        if (collision.gameObject.layer == enemyLayer && !allowCollision)
+        if ((collision.gameObject.layer == enemyLayer && !allowCollision) || collision.gameObject.layer == obstacleLayer)
         {
             playerController.playerDeath.isDead = true;
         }

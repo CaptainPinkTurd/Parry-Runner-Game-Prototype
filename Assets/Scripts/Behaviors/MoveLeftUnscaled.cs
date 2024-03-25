@@ -6,6 +6,6 @@ public class MoveLeftUnscaled : MoveLeft
 {
     protected override void TranslateLeft()
     {
-        transform.parent.Translate(Vector2.left * speed * Time.unscaledDeltaTime, Space.World);
+        transform.parent.Translate(Vector2.left * speed * Time.unscaledDeltaTime, Space.World); 
     }
 }

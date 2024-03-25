@@ -48,6 +48,7 @@ public class PlayerRoll : SaiMonoBehavior
         if (!isRolling) return;
 
         Physics2D.IgnoreLayerCollision(6, 7, true);
+        Physics2D.IgnoreLayerCollision(6, 8, true);
         transform.parent.position = Vector2.MoveTowards(
             transform.parent.position, rollPos[rollDir].transform.position, rollSpeed);
 
@@ -59,6 +60,7 @@ public class PlayerRoll : SaiMonoBehavior
         {
             isRolling = false;
             Physics2D.IgnoreLayerCollision(6, 7, false);
+            Physics2D.IgnoreLayerCollision(6, 8, false);
         }
     }
     private void CheckRollLimit()

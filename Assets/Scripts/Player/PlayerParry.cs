@@ -15,7 +15,7 @@ public class PlayerParry : SaiMonoBehavior
     internal bool isCounter;
 
     [Header("Parry Related Conditions Variables")]
-    internal int parryCounter = 0;
+    internal int parryCounter = 4;
     private const int enemyLayer = 7;
     private const int playerLayer = 6;
     private bool consecutiveParry;
@@ -42,7 +42,7 @@ public class PlayerParry : SaiMonoBehavior
     {
         isParry = true; //cue for parry animation
 
-        yield return new WaitForSeconds(0.1f); //time for parry animation to finish
+        yield return new WaitForSecondsRealtime(0.1f); //time for parry animation to finish
 
         parryCollider.enabled = true;
 
@@ -51,7 +51,7 @@ public class PlayerParry : SaiMonoBehavior
         parryCollider.enabled = false;
         if (!isCounter) consecutiveParry = false; //if isn't countering anything, then turn off consecutive parry flow
 
-        yield return new WaitForSeconds(0.65f);
+        yield return new WaitForSecondsRealtime(0.65f);
 
         isParry = false;
     }
@@ -78,7 +78,7 @@ public class PlayerParry : SaiMonoBehavior
         //Phase 4: setting up conditions upon exiting parry 
         TurnOffParryConditions();
 
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSecondsRealtime(0.1f);
 
         CheckIfConsecutiveParry();
         collision.gameObject.layer = playerLayer; //turn enemy into player's projectile after deflect them
