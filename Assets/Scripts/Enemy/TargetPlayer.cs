@@ -5,6 +5,7 @@ using UnityEngine;
 public class TargetPlayer : MonoBehaviour
 {
     [SerializeField] private GameObject target;
+    [SerializeField] private InCameraDetector inCamera;
     private Vector2 playerDir;
     // Start is called before the first frame update
     void Start()
@@ -17,7 +18,7 @@ public class TargetPlayer : MonoBehaviour
     {
         playerDir = target.transform.position - transform.parent.position;
         
-        if (InCameraDetector.instance.isOnScreen)
+        if (inCamera.isOnScreen)
         {
             transform.parent.Translate(playerDir.normalized * 7f * Time.deltaTime);
         }

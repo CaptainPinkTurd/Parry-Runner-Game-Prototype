@@ -6,6 +6,7 @@ using UnityEngine;
 public class ZigZagMovement : MonoBehaviour
 {
     [SerializeField] float speed;
+    [SerializeField] private InCameraDetector inCamera;
     private float rotationDegree = 180;
     public float currentRotation = 45;
     // Start is called before the first frame update
@@ -22,7 +23,14 @@ public class ZigZagMovement : MonoBehaviour
     }
     protected virtual void Zigzag()
     {
-        transform.parent.Translate(Vector2.up * speed * Time.deltaTime);
+        if (inCamera.isOnScreen)
+        {
+            transform.parent.Translate(Vector2.up * speed * Time.deltaTime);
+        }
+        else
+        {
+            transform.parent.Translate(Vector2.up * speed * Time.unscaledDeltaTime);
+        }
     }
     protected virtual IEnumerator ChangeRotation()
     {
