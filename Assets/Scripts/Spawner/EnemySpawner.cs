@@ -26,7 +26,6 @@ public class EnemySpawner : Spawner
     {
         while (!PlayerController.instance.playerDeath.isDead)
         {
-            print("Zone mode: " + PlayerController.instance.playerZone.inZone);
             //spawnRate = PlayerController.instance.playerZone.inZone == true ? 0.75f : 2f;
             yield return new WaitForSeconds(spawnRate);
             Transform enemyPrefab = GetRandomPrefab();

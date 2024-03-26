@@ -8,6 +8,9 @@ public class PlayerFocusBar : MonoBehaviour
 {
     [SerializeField] Slider focusBar;
     private float currentMeter = 0;
+    private float currentTimeScale;
+    private float meterDrainRate = 0.25f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +22,10 @@ public class PlayerFocusBar : MonoBehaviour
     {
         BarUpdate();
     }
-
+    private void FixedUpdate()
+    {
+        
+    }
     private void BarUpdate()
     {
         if (PlayerController.instance.playerZone.inZone) return;
@@ -34,17 +40,31 @@ public class PlayerFocusBar : MonoBehaviour
     }
     private IEnumerator BarCountDown()
     {
+        float waitTime = 1f;
+        currentTimeScale = 0.5f;
+        meterDrainRate = 0.25f;
+        print(currentTimeScale);
         while (PlayerController.instance.playerZone.inZone)
         {
             yield return new WaitForSecondsRealtime(1);
-            currentMeter -= 0.25f;
+            currentMeter -= meterDrainRate;
             focusBar.value = currentMeter;
+            //if (currentMeter < focusBar.maxValue / 2 && currentTimeScale < 1f)
+            //{
+            //    waitTime = 0.5f;
+            //    //meterDrainRate = 0.05f;
+            //    PlayerController.instance.playerZone.zoneModeUpdateOff = true;
+            //    currentTimeScale += 0.05f;
+            //    Time.timeScale = currentTimeScale;
+            //}
+            print("Timescale: " + Time.timeScale + "\nTimescale holder : " + currentTimeScale);
 
             if (currentMeter > focusBar.minValue) continue;
 
             currentMeter = focusBar.minValue;
             PlayerController.instance.playerParry.parryCounter = (int)currentMeter;
             PlayerController.instance.playerZone.inZone = false;
+            PlayerController.instance.playerZone.zoneModeUpdateOff = false;
         }
     }
 }

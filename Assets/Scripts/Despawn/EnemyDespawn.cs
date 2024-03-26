@@ -8,7 +8,6 @@ public class EnemyDespawn : DespawnByDistance
     protected override void DespawnObject()
     {
         var enemySpawnerType = transform.parent.parent.parent;
-        print(enemySpawnerType.name);   
         if (enemySpawnerType.name == "NormalEnemySpawner")
         {
             EnemySpawner.Instance.Despawn(transform.parent);

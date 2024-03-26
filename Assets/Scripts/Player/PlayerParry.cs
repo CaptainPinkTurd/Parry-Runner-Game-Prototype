@@ -15,7 +15,7 @@ public class PlayerParry : SaiMonoBehavior
     internal bool isCounter;
 
     [Header("Parry Related Conditions Variables")]
-    internal int parryCounter = 0;
+    internal int parryCounter = 4;
     private const int enemyLayer = 7;
     private const int playerLayer = 6;
     internal bool consecutiveParry;
@@ -72,7 +72,8 @@ public class PlayerParry : SaiMonoBehavior
 
         //Phase 2: initiating the attack animation and stopping the game for a moment to emphasize the effect
         isCounter = true; //cue for counter attack animation
-        if (!consecutiveParry) HitStop.instance.Stop(0.125f);
+        if (!consecutiveParry ) HitStop.instance.Stop(0.125f);
+        //hit stop shouldn't occur when player is in zone && !PlayerController.instance.playerZone.inZone.
 
         yield return new WaitForSeconds(0.09f);
 
