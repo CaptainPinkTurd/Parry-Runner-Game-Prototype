@@ -13,18 +13,19 @@ public class MoveLeft : MonoBehaviour
     }
     protected virtual void TranslateLeft()
     {
-        if (transform.parent.gameObject.name == "Background")
-        {
-            transform.parent.Translate(Vector2.left * speed * Time.deltaTime, Space.World);
-            return;
-        }
-        if (inCamera.isOnScreen)
-        {
-            transform.parent.Translate(Vector2.left * speed * Time.deltaTime, Space.World);
-        }
-        else
-        {
-            transform.parent.Translate(Vector2.left * speed * Time.unscaledDeltaTime, Space.World);
-        }
+        //if (transform.parent.gameObject.name == "Background")
+        //{
+        //    transform.parent.Translate(Vector2.left * speed * Time.deltaTime, Space.World);
+        //    return;
+        //}
+        //if (inCamera.isOnScreen)
+        //{
+        //    transform.parent.Translate(Vector2.left * speed * Time.deltaTime, Space.World);
+        //}
+        //else
+        //{
+        //    transform.parent.Translate(Vector2.left * speed * Time.unscaledDeltaTime, Space.World);
+        //}
+        transform.parent.Translate(Vector2.left * speed * Time.deltaTime, Space.World);
     }
 }

@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class PlayerAnimationScript : SaiMonoBehavior
 {
-    [SerializeField] PlayerController playerController;
     private Animator animator;
     protected override void LoadComponentsAndValues()
     {
-        animator = GetComponent<Animator>();    
-        playerController = GetComponentInParent<PlayerController>();    
+        animator = GetComponent<Animator>();       
+    }
+    private void Update()
+    {
+        animator.updateMode = PlayerController.instance.playerParry.consecutiveParry == true ? 
+            AnimatorUpdateMode.UnscaledTime : AnimatorUpdateMode.Normal;   
     }
 
     internal void JumpAnimationOn()
@@ -48,14 +51,14 @@ public class PlayerAnimationScript : SaiMonoBehavior
     }
     internal void PlayAnimations()
     {
-        if (playerController.playerJump.isJump) //activate jump animation
+        if (PlayerController.instance.playerJump.isJump) //activate jump animation
         {
             JumpAnimationOn();
         }
-        if (playerController.playerParry.isParry) //activate parry animation
+        if (PlayerController.instance.playerParry.isParry) //activate parry animation
         {
             ParryAnimationOn();
-            if (playerController.playerParry.isCounter)
+            if (PlayerController.instance.playerParry.isCounter)
             {
                 StartCoroutine(CounterAttackAnimationOn());
             }
@@ -64,7 +67,7 @@ public class PlayerAnimationScript : SaiMonoBehavior
         {
             ParryAnimationOff();
         }
-        if (playerController.playerRoll.isRolling) //activate roll animation
+        if (PlayerController.instance.playerRoll.isRolling) //activate roll animation
         {
             RollAnimationOn();
         }
@@ -72,7 +75,7 @@ public class PlayerAnimationScript : SaiMonoBehavior
         {
             RollAnimationOff();
         }
-        if (playerController.playerDeath.isDead)
+        if (PlayerController.instance.playerDeath.isDead)
         {
             DeathAnimationOn();
         }

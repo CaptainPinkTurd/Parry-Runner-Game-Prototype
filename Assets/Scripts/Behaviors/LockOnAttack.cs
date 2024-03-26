@@ -8,6 +8,7 @@ public class LockOnAttack : SaiMonoBehavior
     [SerializeField] GameObject target;
     [SerializeField] float dashSpeed;
     [SerializeField] Transform warning;
+    [SerializeField] private InCameraDetector inCamera;
     private bool isLockOn;
     private bool isAttacking = false;
     private float levitateSpeed = 1.25f;
@@ -19,12 +20,14 @@ public class LockOnAttack : SaiMonoBehavior
         target = GameObject.Find("Player");
         warning = transform.parent.Find("Warning");
         dashSpeed = 50;
+        inCamera = transform.parent.GetComponentInChildren<InCameraDetector>();
     }
     private void OnEnable()
     {
         gameObject.GetComponentInParent<Rigidbody2D>().gravityScale = 1;
         movement.enabled = true;
         isAttacking = false;
+        warning.transform.localPosition = new Vector3(0f, -0.08f, 0f);
     }
 
     // Update is called once per frame
@@ -70,6 +73,11 @@ public class LockOnAttack : SaiMonoBehavior
     }
     private IEnumerator Alert()
     {
+        if (!inCamera.isOnScreen)
+        {
+            print("Set warning on screen");
+            warning.transform.position = new Vector3(8f, transform.parent.position.y, 0f);
+        }
         warning.gameObject.SetActive(true);
         yield return new WaitForSeconds(0.1f);
         warning.gameObject.SetActive(false);

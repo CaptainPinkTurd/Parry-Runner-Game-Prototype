@@ -15,10 +15,10 @@ public class PlayerParry : SaiMonoBehavior
     internal bool isCounter;
 
     [Header("Parry Related Conditions Variables")]
-    internal int parryCounter = 4;
+    internal int parryCounter = 0;
     private const int enemyLayer = 7;
     private const int playerLayer = 6;
-    private bool consecutiveParry;
+    internal bool consecutiveParry;
 
     protected override void LoadComponentsAndValues()
     {
@@ -42,9 +42,16 @@ public class PlayerParry : SaiMonoBehavior
     {
         isParry = true; //cue for parry animation
 
-        yield return new WaitForSecondsRealtime(0.1f); //time for parry animation to finish
-
-        parryCollider.enabled = true;
+        if (!PlayerController.instance.playerZone.inZone)
+        {
+            yield return new WaitForSecondsRealtime(0.1f); //time for parry animation to finish
+            parryCollider.enabled = true;
+        }
+        else
+        {
+            parryCollider.enabled = true;
+            yield return new WaitForSecondsRealtime(0.1f);
+        }
 
         yield return new WaitForSeconds(parryDuration);
 

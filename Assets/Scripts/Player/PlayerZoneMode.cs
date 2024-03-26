@@ -5,12 +5,6 @@ using UnityEngine;
 public class PlayerZoneMode : MonoBehaviour
 {
     internal bool inZone;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -21,10 +15,14 @@ public class PlayerZoneMode : MonoBehaviour
     {
         if (!inZone) return;
         Time.timeScale = 0.5f;
+        EnemySpawner.Instance.enabled = false;
+        ZoneModeEnemySpawner.Instance.enabled = true; 
     }
     private void OnZoneModeExit()
     {
-        if (inZone || PlayerController.instance.playerParry.isCounter) return;
+        if (inZone) return;
         Time.timeScale = 1;
+        EnemySpawner.Instance.enabled = true;
+        ZoneModeEnemySpawner.Instance.enabled = false;
     }
 }

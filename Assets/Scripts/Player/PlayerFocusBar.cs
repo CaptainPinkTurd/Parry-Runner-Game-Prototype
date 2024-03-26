@@ -37,7 +37,7 @@ public class PlayerFocusBar : MonoBehaviour
         while (PlayerController.instance.playerZone.inZone)
         {
             yield return new WaitForSecondsRealtime(1);
-            currentMeter -= 0.5f;
+            currentMeter -= 0.25f;
             focusBar.value = currentMeter;
 
             if (currentMeter > focusBar.minValue) continue;

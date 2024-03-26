@@ -1,30 +1,33 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemySpawner : Spawner
 {
-    [SerializeField] float spawnRate;
-    public static new EnemySpawner instance { get; private set; }
+    private float spawnRate = 2f;
+    public static EnemySpawner Instance { get; private set; }
     public static string groundTypeEnemy = "Ground Type Enemy";
     public static string airTypeEnemy = "Air Type Enemy";
 
     protected override void Awake()
     {
         base.Awake();
-        if (EnemySpawner.instance != null) Debug.LogError("Only 1 EnemySpawner allow to exist");
-        instance = this;    
+        if (EnemySpawner.Instance != null) Debug.LogError("Only 1 EnemySpawner allow to exist");
+        Instance = this;
     }
-
-    protected override void Start()
+    private void OnEnable()
     {
-        StartCoroutine(EnemySpawn());   
+        StartCoroutine(EnemySpawn());
+    }
+    private void OnDisable()
+    {
+        StopAllCoroutines();
     }
     protected virtual IEnumerator EnemySpawn()
     {
         while (!PlayerController.instance.playerDeath.isDead)
         {
-            spawnRate = PlayerController.instance.playerZone.inZone == true ? 0.5f : 2f;
+            print("Zone mode: " + PlayerController.instance.playerZone.inZone);
+            //spawnRate = PlayerController.instance.playerZone.inZone == true ? 0.75f : 2f;
             yield return new WaitForSeconds(spawnRate);
             Transform enemyPrefab = GetRandomPrefab();
             Quaternion rotation = Quaternion.identity;
