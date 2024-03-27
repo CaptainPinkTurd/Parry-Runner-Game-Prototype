@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public float currentTimeScale;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,5 +21,6 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene("SampleScene");
         }
+        //Time.timeScale = currentTimeScale;
     }
 }

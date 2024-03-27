@@ -20,7 +20,7 @@ public class HitStop : MonoBehaviour
     {
         waiting = true;
         yield return new WaitForSecondsRealtime(duration);
-        print("Hit Stop time resume");
+        //print("Hit Stop time resume");
         Time.timeScale = 1;
         waiting = false;
     }

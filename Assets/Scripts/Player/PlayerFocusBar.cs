@@ -40,24 +40,23 @@ public class PlayerFocusBar : MonoBehaviour
     }
     private IEnumerator BarCountDown()
     {
-        float waitTime = 1f;
         currentTimeScale = 0.5f;
-        meterDrainRate = 0.25f;
+        meterDrainRate = focusBar.maxValue / 10;
         print(currentTimeScale);
         while (PlayerController.instance.playerZone.inZone)
         {
             yield return new WaitForSecondsRealtime(1);
             currentMeter -= meterDrainRate;
+            print("Current Meter: " + currentMeter);
             focusBar.value = currentMeter;
-            //if (currentMeter < focusBar.maxValue / 2 && currentTimeScale < 1f)
-            //{
-            //    waitTime = 0.5f;
-            //    //meterDrainRate = 0.05f;
-            //    PlayerController.instance.playerZone.zoneModeUpdateOff = true;
-            //    currentTimeScale += 0.05f;
-            //    Time.timeScale = currentTimeScale;
-            //}
-            print("Timescale: " + Time.timeScale + "\nTimescale holder : " + currentTimeScale);
+            if (currentMeter < focusBar.maxValue / 2 && currentTimeScale < 1f)
+            {
+                meterDrainRate = focusBar.maxValue / 20;
+                PlayerController.instance.playerZone.zoneModeUpdateOff = true;
+                currentTimeScale += 0.05f;
+                Time.timeScale = currentTimeScale;
+            }
+            //print("Timescale: " + Time.timeScale + "\nTimescale holder : " + currentTimeScale);
 
             if (currentMeter > focusBar.minValue) continue;
 

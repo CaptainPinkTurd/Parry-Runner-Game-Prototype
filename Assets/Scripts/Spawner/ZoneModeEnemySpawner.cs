@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ZoneModeEnemySpawner : Spawner
 {
-    private float spawnRate = 0.75f;
+    private float spawnRate = 0.35f;
     private Vector2 spawnPos;
     private Transform enemyPrefab;
     public static ZoneModeEnemySpawner Instance { get; private set; }
@@ -29,7 +29,7 @@ public class ZoneModeEnemySpawner : Spawner
     {
         while (!PlayerController.instance.playerDeath.isDead)
         {
-            yield return new WaitForSecondsRealtime(spawnRate);
+            yield return new WaitForSeconds(spawnRate);
             Quaternion rotation = Quaternion.identity;
             Transform newEnemy = Spawn(enemyPrefab, spawnPos, rotation);
             newEnemy.gameObject.SetActive(true);

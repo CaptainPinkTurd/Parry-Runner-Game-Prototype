@@ -15,7 +15,7 @@ public class PlayerParry : SaiMonoBehavior
     internal bool isCounter;
 
     [Header("Parry Related Conditions Variables")]
-    internal int parryCounter = 4;
+    internal int parryCounter = 7;
     private const int enemyLayer = 7;
     private const int playerLayer = 6;
     internal bool consecutiveParry;
@@ -72,16 +72,13 @@ public class PlayerParry : SaiMonoBehavior
 
         //Phase 2: initiating the attack animation and stopping the game for a moment to emphasize the effect
         isCounter = true; //cue for counter attack animation
-        if (!consecutiveParry ) HitStop.instance.Stop(0.125f);
-        //hit stop shouldn't occur when player is in zone && !PlayerController.instance.playerZone.inZone.
+        if (!consecutiveParry && !PlayerController.instance.playerZone.inZone) HitStop.instance.Stop(0.125f);
+        //hit stop shouldn't occur when player is in zone 
 
         yield return new WaitForSeconds(0.09f);
 
         //Phase 3: obliterating the enemy
-        Rigidbody2D enemyRb = collision.GetComponent<Rigidbody2D>();
-        Vector2 enemyDir = enemyRb.transform.position - transform.parent.position;
-        enemyRb.AddForce(enemyDir.normalized * parryForce, ForceMode2D.Impulse);
-        enemyRb.AddTorque(parryForce, ForceMode2D.Impulse);
+        ParryKnockBack(collision);
 
         //Phase 4: setting up conditions upon exiting parry 
         TurnOffParryConditions();
@@ -93,6 +90,14 @@ public class PlayerParry : SaiMonoBehavior
         PlayerController.instance.playerRb.constraints &= ~RigidbodyConstraints2D.FreezePositionY; //disable freeze pos at y
         PlayerController.instance.playerCollision.allowCollision = false; //turn on player vulnerability again
         parryCounter++;
+    }
+
+    private void ParryKnockBack(Collider2D collision)
+    {
+        Rigidbody2D enemyRb = collision.GetComponent<Rigidbody2D>();
+        Vector2 enemyDir = enemyRb.transform.position - transform.parent.position;
+        enemyRb.AddForce(enemyDir.normalized * parryForce, ForceMode2D.Impulse);
+        enemyRb.AddTorque(parryForce, ForceMode2D.Impulse);
     }
 
     private void TurnOffParryConditions()

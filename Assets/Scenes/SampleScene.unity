@@ -1986,6 +1986,7 @@ MonoBehaviour:
   dashSpeed: 35
   warning: {fileID: 938385393}
   inCamera: {fileID: 0}
+  reduceTImeRate: 0.02
 --- !u!114 &578782706
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2477,6 +2478,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3bbe412cfd1afe42852b8fd7de7f10d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentTimeScale: 0.5
 --- !u!4 &749863059
 Transform:
   m_ObjectHideFlags: 0
@@ -4772,6 +4774,7 @@ MonoBehaviour:
   dashSpeed: 35
   warning: {fileID: 1037477637}
   inCamera: {fileID: 0}
+  reduceTImeRate: 0.01
 --- !u!114 &1712871559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5215,7 +5218,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 540265660}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 5
+  m_MaxValue: 10
   m_WholeNumbers: 1
   m_Value: 1
   m_OnValueChanged:

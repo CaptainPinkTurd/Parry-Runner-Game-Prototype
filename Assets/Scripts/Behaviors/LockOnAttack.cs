@@ -13,7 +13,6 @@ public class LockOnAttack : SaiMonoBehavior
     private bool isAttacking = false;
     private float levitateSpeed = 1.25f;
     private float rotateSpeed = 500;
-    // Start is called before the first frame update
     protected override void LoadComponentsAndValues()
     {
         movement = GetComponent<MoveLeft>();
@@ -24,16 +23,17 @@ public class LockOnAttack : SaiMonoBehavior
     }
     private void OnEnable()
     {
+        isLockOn = false; //this is what causing the lock on attack to be so unstable, because i didn't set this condition off
+        isAttacking = false;
         gameObject.GetComponentInParent<Rigidbody2D>().gravityScale = 1;
         movement.enabled = true;
-        isAttacking = false;
         warning.transform.localPosition = new Vector3(0f, -0.08f, 0f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        LockOnCondition();
+        LockOnCondition(); 
     }
     private void FixedUpdate()
     {
@@ -61,7 +61,7 @@ public class LockOnAttack : SaiMonoBehavior
     protected virtual IEnumerator LockOn(GameObject target)
     {
         isAttacking = true;
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSecondsRealtime(2.75f);
         var dir = target.transform.position - transform.parent.position;
         gameObject.GetComponentInParent<Rigidbody2D>().AddForce(dir.normalized * dashSpeed, ForceMode2D.Impulse);
     }
@@ -79,12 +79,12 @@ public class LockOnAttack : SaiMonoBehavior
             warning.transform.position = new Vector3(8f, transform.parent.position.y, 0f);
         }
         warning.gameObject.SetActive(true);
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSecondsRealtime(0.1f);
         warning.gameObject.SetActive(false);
     }
     private IEnumerator SetAlert()
     {
-        yield return new WaitForSeconds(2.75f);
+        yield return new WaitForSecondsRealtime(2.25f);
         StartCoroutine(Alert());
     }
 }
