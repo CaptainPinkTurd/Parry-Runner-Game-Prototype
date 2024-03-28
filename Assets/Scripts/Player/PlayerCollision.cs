@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,13 +16,24 @@ public class PlayerCollision : SaiMonoBehavior
     private void OnCollisionEnter2D(Collision2D collision)
     {
         playerController.PlayerLanding();
-        if ((collision.gameObject.layer == enemyLayer && !allowCollision) || collision.gameObject.layer == obstacleLayer)
+        OnCollisionWithEnemy(collision.gameObject);
+    }
+
+    private void OnCollisionWithEnemy(GameObject enemyObject)
+    {
+        if (playerController.playerZone.inZone && enemyObject.layer == enemyLayer)
+        {
+            StartCoroutine(playerController.playerParry.SpecialParry(enemyObject));
+            return;
+        }
+        if ((enemyObject.layer == enemyLayer && !allowCollision) || enemyObject.layer == obstacleLayer)
         {
             playerController.playerDeath.isDead = true;
         }
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        StartCoroutine(playerController.playerParry.Parry(collision));
+        StartCoroutine(playerController.playerParry.Parry(collision.gameObject));
     }
 }

@@ -15,10 +15,11 @@ public class PlayerParry : SaiMonoBehavior
     internal bool isCounter;
 
     [Header("Parry Related Conditions Variables")]
-    internal int parryCounter = 7;
+    internal int parryCounter = 10;
     private const int enemyLayer = 7;
     private const int playerLayer = 6;
     internal bool consecutiveParry;
+    internal bool isSpecialParry;
 
     protected override void LoadComponentsAndValues()
     {
@@ -62,12 +63,12 @@ public class PlayerParry : SaiMonoBehavior
 
         isParry = false;
     }
-    internal IEnumerator Parry(Collider2D collision)
+    internal IEnumerator Parry(GameObject enemyObject)
     {
-        if (collision.gameObject.layer != enemyLayer || PlayerController.instance.playerDeath.isDead) yield break;
+        if (enemyObject.layer != enemyLayer || PlayerController.instance.playerDeath.isDead) yield break;
 
         //Phase 1: setting up player conditions for parry
-        PlayerController.instance.playerCollision.allowCollision = true; //player become immune to enemy
+        PlayerController.instance.playerCollision.allowCollision = true; //player become immune to enemy contact
         PlayerController.instance.playerRb.constraints = RigidbodyConstraints2D.FreezeAll;
 
         //Phase 2: initiating the attack animation and stopping the game for a moment to emphasize the effect
@@ -78,7 +79,8 @@ public class PlayerParry : SaiMonoBehavior
         yield return new WaitForSeconds(0.09f);
 
         //Phase 3: obliterating the enemy
-        ParryKnockBack(collision);
+        ParryKnockBack(enemyObject);
+        print("Is parry");
 
         //Phase 4: setting up conditions upon exiting parry 
         TurnOffParryConditions();
@@ -86,18 +88,46 @@ public class PlayerParry : SaiMonoBehavior
         yield return new WaitForSecondsRealtime(0.1f);
 
         CheckIfConsecutiveParry();
-        collision.gameObject.layer = playerLayer; //turn enemy into player's projectile after deflect them
         PlayerController.instance.playerRb.constraints &= ~RigidbodyConstraints2D.FreezePositionY; //disable freeze pos at y
         PlayerController.instance.playerCollision.allowCollision = false; //turn on player vulnerability again
         parryCounter++;
     }
-
-    private void ParryKnockBack(Collider2D collision)
+    internal IEnumerator SpecialParry(GameObject enemyObject) //only activate during or after zone 
     {
-        Rigidbody2D enemyRb = collision.GetComponent<Rigidbody2D>();
-        Vector2 enemyDir = enemyRb.transform.position - transform.parent.position;
-        enemyRb.AddForce(enemyDir.normalized * parryForce, ForceMode2D.Impulse);
-        enemyRb.AddTorque(parryForce, ForceMode2D.Impulse);
+        PlayerController.instance.playerRb.constraints = RigidbodyConstraints2D.FreezeAll;
+
+        isSpecialParry = true;
+
+        yield return new WaitForSeconds(0.09f);
+        ParryKnockBack(enemyObject);
+
+        yield return new WaitForSeconds(0.1f);
+        isSpecialParry = false;
+    }
+
+    private void ParryKnockBack(GameObject enemyObject)
+    {
+        if(isParry && isCounter)
+        {
+            Rigidbody2D enemyRb = enemyObject.GetComponent<Rigidbody2D>();
+            Vector2 enemyDir = enemyRb.transform.position - transform.parent.position;
+            enemyRb.AddForce(enemyDir.normalized * parryForce, ForceMode2D.Impulse);
+            enemyRb.AddTorque(parryForce, ForceMode2D.Impulse);
+        }
+        if (isSpecialParry)
+        {
+            Collider2D groundCollider = GameObject.Find("Ground").GetComponent<Collider2D>();
+            Collider2D enemyCollider = enemyObject.GetComponent<Collider2D>();
+            var targetEnemy = ZoneModeEnemySpawner.Instance.newestSpawnedEnemy;
+            print("Targeted Enemy Position: " + targetEnemy.transform.position);
+
+            Rigidbody2D enemyRb = enemyObject.GetComponent<Rigidbody2D>();
+            Vector2 enemyDir = targetEnemy.transform.position - transform.parent.position;
+            Physics2D.IgnoreCollision(enemyCollider, groundCollider);
+            enemyRb.AddForce(enemyDir.normalized * parryForce, ForceMode2D.Impulse);
+            enemyRb.AddTorque(parryForce, ForceMode2D.Impulse);
+        }
+        enemyObject.layer = playerLayer; //turn enemy into player's projectile after deflect them
     }
 
     private void TurnOffParryConditions()

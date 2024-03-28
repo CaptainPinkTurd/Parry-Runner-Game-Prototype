@@ -75,7 +75,7 @@ public class LockOnAttack : SaiMonoBehavior
     {
         if (!inCamera.isOnScreen)
         {
-            print("Set warning on screen");
+            //Set warning on screen when object is out of screen
             warning.transform.position = new Vector3(8f, transform.parent.position.y, 0f);
         }
         warning.gameObject.SetActive(true);
@@ -84,7 +84,7 @@ public class LockOnAttack : SaiMonoBehavior
     }
     private IEnumerator SetAlert()
     {
-        yield return new WaitForSecondsRealtime(2.25f);
+        yield return new WaitForSecondsRealtime(2.5f);
         StartCoroutine(Alert());
     }
 }

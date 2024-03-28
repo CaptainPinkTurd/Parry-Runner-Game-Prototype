@@ -8,6 +8,7 @@ public class ZoneModeEnemySpawner : Spawner
     private Vector2 spawnPos;
     private Transform enemyPrefab;
     public static ZoneModeEnemySpawner Instance { get; private set; }
+    internal Transform newestSpawnedEnemy;
 
     protected override void Awake()
     {
@@ -31,8 +32,8 @@ public class ZoneModeEnemySpawner : Spawner
         {
             yield return new WaitForSeconds(spawnRate);
             Quaternion rotation = Quaternion.identity;
-            Transform newEnemy = Spawn(enemyPrefab, spawnPos, rotation);
-            newEnemy.gameObject.SetActive(true);
+            newestSpawnedEnemy = Spawn(enemyPrefab, spawnPos, rotation);
+            newestSpawnedEnemy.gameObject.SetActive(true);
         }
     }
 }

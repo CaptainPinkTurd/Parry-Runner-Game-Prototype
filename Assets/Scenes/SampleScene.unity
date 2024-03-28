@@ -1986,7 +1986,6 @@ MonoBehaviour:
   dashSpeed: 35
   warning: {fileID: 938385393}
   inCamera: {fileID: 0}
-  reduceTImeRate: 0.02
 --- !u!114 &578782706
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4774,7 +4773,6 @@ MonoBehaviour:
   dashSpeed: 35
   warning: {fileID: 1037477637}
   inCamera: {fileID: 0}
-  reduceTImeRate: 0.01
 --- !u!114 &1712871559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5301,7 +5299,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1952606543}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 3.03, y: -0.98, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -21,4 +21,14 @@ public class BaseEnemy : SaiMonoBehavior
     {
 
     }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(gameObject.layer == 6 && collision.gameObject.layer == enemyLayer)
+        {
+            LayerMask enemyMask = LayerMask.GetMask("Enemy");
+            var gameObjectRb = gameObject.GetComponent<Rigidbody2D>();
+            print("Explode");
+            gameObjectRb.Explosion2D(100, gameObject, 100, enemyMask);
+        }
+    }
 }
