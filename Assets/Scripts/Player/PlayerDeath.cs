@@ -16,6 +16,7 @@ public class PlayerDeath : SaiMonoBehavior
     {
         if (!isDead) return;
 
+        print("Is Dead");
         playerController.enabled = false;
         movingBackground.SetActive(false);  
     }

@@ -6,6 +6,7 @@ public class PlayerZoneMode : MonoBehaviour
 {
     internal bool inZone;
     internal bool zoneModeUpdateOff = false; //allow timescale to be changed when needed 
+    internal bool justEnded = false;
     // Update is called once per frame
     void Update()
     {

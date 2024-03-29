@@ -7,7 +7,7 @@ using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCou
 public class PlayerParry : SaiMonoBehavior
 {
     [Header("Parry Mechanic")]
-    [SerializeField] Collider2D parryCollider;
+    [SerializeField] internal Collider2D parryCollider;
     [SerializeField] float parryForce;
     [SerializeField] float parryDuration;
     private Coroutine currentParryState = null;
@@ -43,16 +43,18 @@ public class PlayerParry : SaiMonoBehavior
     {
         isParry = true; //cue for parry animation
 
-        if (!PlayerController.instance.playerZone.inZone)
-        {
-            yield return new WaitForSecondsRealtime(0.1f); //time for parry animation to finish
-            parryCollider.enabled = true;
-        }
-        else
-        {
-            parryCollider.enabled = true;
-            yield return new WaitForSecondsRealtime(0.1f);
-        }
+        //if (!PlayerController.instance.playerZone.inZone)
+        //{
+        //    yield return new WaitForSecondsRealtime(0.1f); //time for parry animation to finish
+        //    parryCollider.enabled = true;
+        //}
+        //else
+        //{
+        //    parryCollider.enabled = true;
+        //    yield return new WaitForSecondsRealtime(0.1f);
+        //}
+        yield return new WaitForSecondsRealtime(0.1f); //time for parry animation to finish
+        parryCollider.enabled = true;
 
         yield return new WaitForSeconds(parryDuration);
 
@@ -80,7 +82,7 @@ public class PlayerParry : SaiMonoBehavior
 
         //Phase 3: obliterating the enemy
         ParryKnockBack(enemyObject);
-        print("Is parry");
+        //print("Is parry");
 
         //Phase 4: setting up conditions upon exiting parry 
         TurnOffParryConditions();
@@ -94,15 +96,21 @@ public class PlayerParry : SaiMonoBehavior
     }
     internal IEnumerator SpecialParry(GameObject enemyObject) //only activate during or after zone 
     {
+        if (enemyObject.layer != enemyLayer || PlayerController.instance.playerDeath.isDead) yield break;
+
         PlayerController.instance.playerRb.constraints = RigidbodyConstraints2D.FreezeAll;
+        PlayerController.instance.playerCollision.allowCollision = true;
 
         isSpecialParry = true;
 
         yield return new WaitForSeconds(0.09f);
+        
         ParryKnockBack(enemyObject);
 
         yield return new WaitForSeconds(0.1f);
         isSpecialParry = false;
+        PlayerController.instance.playerRb.constraints &= ~RigidbodyConstraints2D.FreezePositionY; //disable freeze pos at y
+        PlayerController.instance.playerCollision.allowCollision = false; //turn on player vulnerability again
     }
 
     private void ParryKnockBack(GameObject enemyObject)
@@ -118,12 +126,13 @@ public class PlayerParry : SaiMonoBehavior
         {
             Collider2D groundCollider = GameObject.Find("Ground").GetComponent<Collider2D>();
             Collider2D enemyCollider = enemyObject.GetComponent<Collider2D>();
-            var targetEnemy = ZoneModeEnemySpawner.Instance.newestSpawnedEnemy;
-            print("Targeted Enemy Position: " + targetEnemy.transform.position);
+            var targetEnemy = FindClosestTarget.Instance.FindClosestEnemy(enemyObject.transform);
+            //print("Targeted Enemy Position: " + targetEnemy.transform.position);
 
             Rigidbody2D enemyRb = enemyObject.GetComponent<Rigidbody2D>();
             Vector2 enemyDir = targetEnemy.transform.position - transform.parent.position;
             Physics2D.IgnoreCollision(enemyCollider, groundCollider);
+            enemyRb.collisionDetectionMode = CollisionDetectionMode2D.Continuous; //prevent object from phasing
             enemyRb.AddForce(enemyDir.normalized * parryForce, ForceMode2D.Impulse);
             enemyRb.AddTorque(parryForce, ForceMode2D.Impulse);
         }

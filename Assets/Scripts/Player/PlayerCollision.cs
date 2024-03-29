@@ -21,9 +21,10 @@ public class PlayerCollision : SaiMonoBehavior
 
     private void OnCollisionWithEnemy(GameObject enemyObject)
     {
-        if (playerController.playerZone.inZone && enemyObject.layer == enemyLayer)
+        if (playerController.playerZone.inZone && enemyObject.layer == enemyLayer && !allowCollision)
         {
             StartCoroutine(playerController.playerParry.SpecialParry(enemyObject));
+            print("Forced Special parry");
             return;
         }
         if ((enemyObject.layer == enemyLayer && !allowCollision) || enemyObject.layer == obstacleLayer)
@@ -34,6 +35,12 @@ public class PlayerCollision : SaiMonoBehavior
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (PlayerController.instance.playerZone.justEnded)
+        {
+            StartCoroutine(playerController.playerParry.SpecialParry(collision.gameObject));
+            print("Intentional Special Parry");
+            return;
+        }
         StartCoroutine(playerController.playerParry.Parry(collision.gameObject));
     }
 }

@@ -23,21 +23,17 @@ public class PlayerAnimationScript : SaiMonoBehavior
     {
         animator.SetBool("IsGround", true);
     }
-    internal void ParryAnimationOn()
+    internal void ParryAnimations()
     {
-        animator.SetBool("IsParry", true);
+        animator.SetBool("IsParry", PlayerController.instance.playerParry.isParry);
+        if (PlayerController.instance.playerParry.isCounter)
+        {
+            StartCoroutine(CounterAttackAnimationOn());
+        }
     }
-    internal void ParryAnimationOff()
+    internal void RollAnimations()
     {
-        animator.SetBool("IsParry", false);
-    }
-    internal void RollAnimationOn()
-    {
-        animator.SetBool("IsRoll", true);
-    }
-    internal void RollAnimationOff()
-    {
-        animator.SetBool("IsRoll", false);
+        animator.SetBool("IsRoll", PlayerController.instance.playerRoll.isRolling);
     }
     internal IEnumerator CounterAttackAnimationOn()
     {
@@ -49,32 +45,19 @@ public class PlayerAnimationScript : SaiMonoBehavior
     {
         animator.SetTrigger("IsDead");
     }
+    private void SpecialParryAnimations()
+    {
+        animator.SetBool("IsSpecialParry", PlayerController.instance.playerParry.isSpecialParry);
+    }
     internal void PlayAnimations()
     {
         if (PlayerController.instance.playerJump.isJump) //activate jump animation
         {
             JumpAnimationOn();
         }
-        if (PlayerController.instance.playerParry.isParry) //activate parry animation
-        {
-            ParryAnimationOn();
-            if (PlayerController.instance.playerParry.isCounter)
-            {
-                StartCoroutine(CounterAttackAnimationOn());
-            }
-        }
-        else //deactivate parry animation
-        {
-            ParryAnimationOff();
-        }
-        if (PlayerController.instance.playerRoll.isRolling) //activate roll animation
-        {
-            RollAnimationOn();
-        }
-        else //deactivate roll animation
-        {
-            RollAnimationOff();
-        }
+        ParryAnimations(); //play parry animation
+        SpecialParryAnimations();
+        RollAnimations(); //play roll animation
         if (PlayerController.instance.playerDeath.isDead)
         {
             DeathAnimationOn();

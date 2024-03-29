@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class BaseEnemy : SaiMonoBehavior
 {
@@ -8,7 +9,8 @@ public class BaseEnemy : SaiMonoBehavior
     internal InCameraDetector inCamera;
     private void OnEnable()
     {
-        gameObject.layer = enemyLayer;  
+        gameObject.layer = enemyLayer;
+        gameObject.GetComponent<Rigidbody2D>().collisionDetectionMode = CollisionDetectionMode2D.Discrete;
     }
     // Start is called before the first frame update
     void Start()
@@ -19,16 +21,14 @@ public class BaseEnemy : SaiMonoBehavior
     // Update is called once per frame
     void Update()
     {
-
+      
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(gameObject.layer == 6 && collision.gameObject.layer == enemyLayer)
         {
             LayerMask enemyMask = LayerMask.GetMask("Enemy");
-            var gameObjectRb = gameObject.GetComponent<Rigidbody2D>();
-            print("Explode");
-            gameObjectRb.Explosion2D(100, gameObject, 100, enemyMask);
+            ExplosionForce2D.Explosion2D(75, gameObject, 50, enemyMask);
         }
     }
 }

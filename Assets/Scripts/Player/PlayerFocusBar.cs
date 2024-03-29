@@ -56,6 +56,8 @@ public class PlayerFocusBar : MonoBehaviour
 
             if (currentMeter > focusBar.minValue) continue;
 
+            PlayerController.instance.playerZone.justEnded = true;
+            yield return new WaitForSeconds(0.5f);
             TurnOffZone();
         }
     }
@@ -76,5 +78,6 @@ public class PlayerFocusBar : MonoBehaviour
         PlayerController.instance.playerParry.parryCounter = (int)currentMeter;
         PlayerController.instance.playerZone.inZone = false;
         PlayerController.instance.playerZone.zoneModeUpdateOff = false;
+        PlayerController.instance.playerZone.justEnded = false;
     }
 }
