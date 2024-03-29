@@ -13,13 +13,14 @@ public class PlayerParry : SaiMonoBehavior
     private Coroutine currentParryState = null;
     internal bool isParry;
     internal bool isCounter;
+    internal bool isSpecialParry;
 
     [Header("Parry Related Conditions Variables")]
-    internal int parryCounter = 10;
+    internal int parryCounter = 0;
     private const int enemyLayer = 7;
     private const int playerLayer = 6;
     internal bool consecutiveParry;
-    internal bool isSpecialParry;
+    internal bool gotSpecialParried; //check if the enemy got special parried or not
 
     protected override void LoadComponentsAndValues()
     {
@@ -28,7 +29,7 @@ public class PlayerParry : SaiMonoBehavior
     }
     private void LoadParryComponents()
     {
-        parryForce = 50;
+        parryForce = 60;
         isParry = false;
         isCounter = false;
     }
@@ -89,6 +90,7 @@ public class PlayerParry : SaiMonoBehavior
 
         yield return new WaitForSecondsRealtime(0.1f);
 
+        enemyObject.layer = playerLayer; //turn enemy into player's projectile after deflect them
         CheckIfConsecutiveParry();
         PlayerController.instance.playerRb.constraints &= ~RigidbodyConstraints2D.FreezePositionY; //disable freeze pos at y
         PlayerController.instance.playerCollision.allowCollision = false; //turn on player vulnerability again
@@ -106,6 +108,7 @@ public class PlayerParry : SaiMonoBehavior
         yield return new WaitForSeconds(0.09f);
         
         ParryKnockBack(enemyObject);
+        enemyObject.layer = playerLayer; //turn on layer immediately to ensure the explosion collision
 
         yield return new WaitForSeconds(0.1f);
         isSpecialParry = false;
@@ -118,6 +121,7 @@ public class PlayerParry : SaiMonoBehavior
         if(isParry && isCounter)
         {
             Rigidbody2D enemyRb = enemyObject.GetComponent<Rigidbody2D>();
+            enemyRb.collisionDetectionMode = CollisionDetectionMode2D.Continuous; //prevent object from phasing
             Vector2 enemyDir = enemyRb.transform.position - transform.parent.position;
             enemyRb.AddForce(enemyDir.normalized * parryForce, ForceMode2D.Impulse);
             enemyRb.AddTorque(parryForce, ForceMode2D.Impulse);
@@ -133,10 +137,12 @@ public class PlayerParry : SaiMonoBehavior
             Vector2 enemyDir = targetEnemy.transform.position - transform.parent.position;
             Physics2D.IgnoreCollision(enemyCollider, groundCollider);
             enemyRb.collisionDetectionMode = CollisionDetectionMode2D.Continuous; //prevent object from phasing
+
+            enemyRb.velocity = Vector2.zero; //reset velocity to avoid unwanted deflect direction
             enemyRb.AddForce(enemyDir.normalized * parryForce, ForceMode2D.Impulse);
             enemyRb.AddTorque(parryForce, ForceMode2D.Impulse);
+            gotSpecialParried = true;
         }
-        enemyObject.layer = playerLayer; //turn enemy into player's projectile after deflect them
     }
 
     private void TurnOffParryConditions()

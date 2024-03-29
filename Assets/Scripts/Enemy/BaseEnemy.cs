@@ -25,10 +25,13 @@ public class BaseEnemy : SaiMonoBehavior
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(gameObject.layer == 6 && collision.gameObject.layer == enemyLayer)
+        if(gameObject.layer == 6 && collision.gameObject.layer == enemyLayer && 
+            PlayerController.instance.playerParry.gotSpecialParried)
         {
+            print("Boom");
+            PlayerController.instance.playerParry.gotSpecialParried = false;
             LayerMask enemyMask = LayerMask.GetMask("Enemy");
-            ExplosionForce2D.Explosion2D(75, gameObject, 50, enemyMask);
+            ExplosionForce2D.Explosion2D(100, gameObject, 50, enemyMask);
         }
     }
 }

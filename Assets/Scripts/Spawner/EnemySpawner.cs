@@ -30,15 +30,7 @@ public class EnemySpawner : Spawner
             yield return new WaitForSeconds(spawnRate);
             Transform enemyPrefab = GetRandomPrefab();
             Quaternion rotation = Quaternion.identity;
-            Vector2 spawnPos;
-            if (enemyPrefab.gameObject.layer == 8)
-            {
-                spawnPos = new Vector2(Random.Range(15, 17), -2.75f);
-            }
-            else
-            {
-                spawnPos = new Vector2(Random.Range(15, 17), Random.Range(-4, 4));
-            }
+            Vector2 spawnPos = new Vector2(Random.Range(17, 19), Random.Range(-3, 4));
             Transform newEnemy = Spawn(enemyPrefab, spawnPos, rotation);
             newEnemy.gameObject.SetActive(true);
         }

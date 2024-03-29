@@ -18,7 +18,7 @@ public class LockOnAttack : SaiMonoBehavior
         movement = GetComponent<MoveLeft>();
         target = GameObject.Find("Player");
         warning = transform.parent.Find("Warning");
-        dashSpeed = 50;
+        dashSpeed = 60;
         inCamera = transform.parent.GetComponentInChildren<InCameraDetector>();
     }
     private void OnEnable()
@@ -52,7 +52,7 @@ public class LockOnAttack : SaiMonoBehavior
     }
     protected virtual void LockOnCondition()
     {
-        if (transform.parent.position.x > 6) return;
+        if (transform.parent.position.x > 8) return;
 
         movement.enabled = false;
         isLockOn = true;

@@ -59,6 +59,7 @@ public class PlayerFocusBar : MonoBehaviour
             PlayerController.instance.playerZone.justEnded = true;
             yield return new WaitForSeconds(0.5f);
             TurnOffZone();
+            
         }
     }
     private void TimeScaleGradualIncrease()

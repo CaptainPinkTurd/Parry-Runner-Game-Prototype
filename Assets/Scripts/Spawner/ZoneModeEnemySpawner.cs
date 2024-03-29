@@ -19,7 +19,7 @@ public class ZoneModeEnemySpawner : Spawner
     private void OnEnable()
     {
         StartCoroutine(EnemySpawn());
-        spawnPos = new Vector2(Random.Range(15, 17), Random.Range(-4, 4));
+        spawnPos = new Vector2(Random.Range(17, 19), Random.Range(-3, 4));
         enemyPrefab = GetRandomPrefab();
     }
     private void OnDisable()
