@@ -16,7 +16,7 @@ public class PlayerParry : SaiMonoBehavior
     internal bool isSpecialParry;
 
     [Header("Parry Related Conditions Variables")]
-    internal int parryCounter = 0;
+    internal int parryCounter = 10;
     private const int enemyLayer = 7;
     private const int playerLayer = 6;
     internal bool consecutiveParry;

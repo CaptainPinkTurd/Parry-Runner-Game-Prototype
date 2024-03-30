@@ -32,6 +32,7 @@ public class BaseEnemy : SaiMonoBehavior
             PlayerController.instance.playerParry.gotSpecialParried = false;
             LayerMask enemyMask = LayerMask.GetMask("Enemy");
             ExplosionForce2D.Explosion2D(100, gameObject, 50, enemyMask);
+            CameraShake.instance.ExplosionShake();
         }
     }
 }
