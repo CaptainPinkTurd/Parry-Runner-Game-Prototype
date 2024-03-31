@@ -7,8 +7,11 @@ public class PlayerJump : SaiMonoBehavior
     [Header("Jump Mechanic")]
     [SerializeField] Rigidbody2D rb;
     [SerializeField] float jumpForce;
+    private float fallForce = 37.5f;
     private int numberOfJump;
     internal bool isJump = false;
+    private bool canJump = false;
+    private int fallVelocityLimit = 6;
 
     protected override void LoadComponentsAndValues()
     {
@@ -18,13 +21,13 @@ public class PlayerJump : SaiMonoBehavior
     private void LoadJumpComponents()
     {
         rb = GetComponentInParent<Rigidbody2D>();
-        jumpForce = 11;
+        jumpForce = 15;
         isJump = false;
         numberOfJump = 2;
     }
     internal void CheckForJump()
     {
-        if (Input.GetKeyDown(KeyCode.W) && numberOfJump > 0)
+        if (Input.GetKeyDown(KeyCode.W) && numberOfJump > 0 && canJump)
         {
             isJump = true;
         }
@@ -33,10 +36,21 @@ public class PlayerJump : SaiMonoBehavior
     {
         if (isJump) 
         {
+            canJump = false;
             isJump = false;
+            if (numberOfJump == 1) rb.velocity = Vector2.zero; //reseting inertia
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             numberOfJump--;
-        } 
+        }
+        else 
+        {
+            if(rb.velocity.y <= 8) canJump = true; //double jump delay for snappier jump
+
+            if (rb.velocity.y <= fallVelocityLimit)
+            {
+                rb.AddForce(Vector2.down * fallForce, ForceMode2D.Force); 
+            }
+        }
     }
     internal void JumpRefresh()
     {

@@ -28,6 +28,7 @@ public class LockOnAttack : SaiMonoBehavior
         gameObject.GetComponentInParent<Rigidbody2D>().gravityScale = 1;
         movement.enabled = true;
         warning.transform.localPosition = new Vector3(0f, -0.08f, 0f);
+        Physics2D.IgnoreCollision(transform.parent.GetComponent<Collider2D>(), target.GetComponent<Collider2D>(), true);            
     }
 
     // Update is called once per frame
@@ -62,6 +63,7 @@ public class LockOnAttack : SaiMonoBehavior
     {
         isAttacking = true;
         yield return new WaitForSecondsRealtime(2.75f);
+        Physics2D.IgnoreCollision(transform.parent.GetComponent<Collider2D>(), target.GetComponent<Collider2D>(), false);
         var dir = target.transform.position - transform.parent.position;
         gameObject.GetComponentInParent<Rigidbody2D>().AddForce(dir.normalized * dashSpeed, ForceMode2D.Impulse);
     }
