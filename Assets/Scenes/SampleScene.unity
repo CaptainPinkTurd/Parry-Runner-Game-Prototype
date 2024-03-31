@@ -4373,10 +4373,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1251809459}
   - component: {fileID: 1251809460}
-  - component: {fileID: 1251809461}
   - component: {fileID: 1251809462}
   - component: {fileID: 1251809463}
   - component: {fileID: 1251809464}
+  - component: {fileID: 1251809466}
+  - component: {fileID: 1251809465}
   m_Layer: 0
   m_Name: PlayerBehaviors
   m_TagString: Untagged
@@ -4413,20 +4414,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 2128829802}
   jumpForce: 7
---- !u!114 &1251809461
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1251809458}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: baa47e1d6b271b04c921d08a1c84eea7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parryCollider: {fileID: 196605460}
-  parryForce: 50
 --- !u!114 &1251809462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4469,6 +4456,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd0b9e1df29d79b40a3e976303c2b041, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1251809465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1251809458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91d9adf4fef1040408bfacdf4aadf28f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parryCollider: {fileID: 196605460}
+  parryForce: 60
+--- !u!114 &1251809466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1251809458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76ef921e6a1886b499850a35f759da58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parryCollider: {fileID: 196605460}
+  parryForce: 60
 --- !u!1 &1288052421
 GameObject:
   m_ObjectHideFlags: 0
@@ -6445,12 +6460,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerRb: {fileID: 0}
   playerJump: {fileID: 0}
-  playerParry: {fileID: 0}
   playerAnimation: {fileID: 0}
   playerRoll: {fileID: 0}
   playerDeath: {fileID: 0}
   playerCollision: {fileID: 0}
   playerZone: {fileID: 0}
+  playerParry: {fileID: 0}
+  playerSpecialParry: {fileID: 0}
 --- !u!114 &2128829805
 MonoBehaviour:
   m_ObjectHideFlags: 0

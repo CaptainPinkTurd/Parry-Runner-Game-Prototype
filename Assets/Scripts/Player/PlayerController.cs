@@ -9,12 +9,13 @@ public class PlayerController : SaiMonoBehavior
 
     [SerializeField] internal Rigidbody2D playerRb;
     [SerializeField] internal PlayerJump playerJump;
-    [SerializeField] internal PlayerParry playerParry;
     [SerializeField] internal PlayerAnimationScript playerAnimation;
     [SerializeField] internal PlayerRoll playerRoll; 
     [SerializeField] internal PlayerDeath playerDeath;
     [SerializeField] internal PlayerCollision playerCollision;
     [SerializeField] internal PlayerZoneMode playerZone;
+    [SerializeField] internal PlayerParry playerParry;
+    [SerializeField] internal PlayerSpecialParry playerSpecialParry;
     // Start is called before the first frame update
     protected override void LoadComponentsAndValues()
     {
@@ -58,11 +59,12 @@ public class PlayerController : SaiMonoBehavior
         instance = this;
         playerRb = GetComponent<Rigidbody2D>();
         playerJump = GetComponentInChildren<PlayerJump>();
-        playerParry = GetComponentInChildren<PlayerParry>();
         playerAnimation = GetComponentInChildren<PlayerAnimationScript>();
         playerRoll = GetComponentInChildren<PlayerRoll>();
         playerDeath = GetComponentInChildren<PlayerDeath>();
         playerZone = GetComponentInChildren<PlayerZoneMode>();
         playerCollision = GetComponent<PlayerCollision>();
+        playerParry = GetComponentInChildren<PlayerParry>();
+        playerSpecialParry = GetComponentInChildren<PlayerSpecialParry>();
     }
 }

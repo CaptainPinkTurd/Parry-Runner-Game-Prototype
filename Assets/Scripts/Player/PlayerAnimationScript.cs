@@ -47,7 +47,7 @@ public class PlayerAnimationScript : SaiMonoBehavior
     }
     private void SpecialParryAnimations()
     {
-        animator.SetBool("IsSpecialParry", PlayerController.instance.playerParry.isSpecialParry);
+        animator.SetBool("IsSpecialParry", PlayerController.instance.playerSpecialParry.isSpecialParry);
     }
     internal void PlayAnimations()
     {

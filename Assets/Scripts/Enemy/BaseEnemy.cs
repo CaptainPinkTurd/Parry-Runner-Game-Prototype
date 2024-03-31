@@ -26,10 +26,10 @@ public class BaseEnemy : SaiMonoBehavior
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(gameObject.layer == 6 && collision.gameObject.layer == enemyLayer && 
-            PlayerController.instance.playerParry.gotSpecialParried)
+            PlayerController.instance.playerSpecialParry.gotSpecialParried)
         {
             print("Boom");
-            PlayerController.instance.playerParry.gotSpecialParried = false;
+            PlayerController.instance.playerSpecialParry.gotSpecialParried = false;
             LayerMask enemyMask = LayerMask.GetMask("Enemy");
             ExplosionForce2D.Explosion2D(100, gameObject, 50, enemyMask);
             CameraShake.instance.ExplosionShake();

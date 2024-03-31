@@ -22,13 +22,9 @@ public class PlayerFocusBar : MonoBehaviour
     {
         BarUpdate();
     }
-    private void FixedUpdate()
-    {
-        
-    }
     private void BarUpdate()
     {
-        if (PlayerController.instance.playerParry.isSpecialParry)
+        if (PlayerController.instance.playerSpecialParry.isSpecialParry)
         {
             TurnOffZone();
         }
