@@ -9,14 +9,14 @@ public class PlayerParry : SaiMonoBehavior
     [Header("Parry Mechanic")]
     [SerializeField] internal Collider2D parryCollider;
     [SerializeField] float parryForce;
-    [SerializeField] float parryDuration;
+    private float parryDuration;
     private Coroutine currentParryState = null;
     internal bool isParry;
     internal bool isCounter;
     internal bool isSpecialParry;
 
     [Header("Parry Related Conditions Variables")]
-    internal int parryCounter = 10;
+    internal int parryCounter = 0;
     private const int enemyLayer = 7;
     private const int playerLayer = 6;
     internal bool consecutiveParry;
@@ -30,6 +30,7 @@ public class PlayerParry : SaiMonoBehavior
     private void LoadParryComponents()
     {
         parryForce = 60;
+        parryDuration = 0.3f;
         isParry = false;
         isCounter = false;
     }
@@ -43,18 +44,8 @@ public class PlayerParry : SaiMonoBehavior
     protected IEnumerator EnterParryState()
     {
         isParry = true; //cue for parry animation
-
-        //if (!PlayerController.instance.playerZone.inZone)
-        //{
-        //    yield return new WaitForSecondsRealtime(0.1f); //time for parry animation to finish
-        //    parryCollider.enabled = true;
-        //}
-        //else
-        //{
-        //    parryCollider.enabled = true;
-        //    yield return new WaitForSecondsRealtime(0.1f);
-        //}
-        yield return new WaitForSecondsRealtime(0.1f); //time for parry animation to finish
+        
+        yield return new WaitForSecondsRealtime(0.06f); //parry prepare time
         parryCollider.enabled = true;
 
         yield return new WaitForSeconds(parryDuration);
@@ -62,7 +53,7 @@ public class PlayerParry : SaiMonoBehavior
         parryCollider.enabled = false;
         if (!isCounter) consecutiveParry = false; //if isn't countering anything, then turn off consecutive parry flow
 
-        yield return new WaitForSecondsRealtime(0.65f);
+        yield return new WaitForSecondsRealtime(0.64f);
 
         isParry = false;
     }

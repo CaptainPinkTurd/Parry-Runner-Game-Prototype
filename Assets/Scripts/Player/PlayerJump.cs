@@ -18,7 +18,7 @@ public class PlayerJump : SaiMonoBehavior
     private void LoadJumpComponents()
     {
         rb = GetComponentInParent<Rigidbody2D>();
-        jumpForce = 7;
+        jumpForce = 11;
         isJump = false;
         numberOfJump = 2;
     }
