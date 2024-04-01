@@ -18,6 +18,8 @@ public class PlayerDeath : SaiMonoBehavior
 
         print("Is Dead");
         playerController.enabled = false;
-        movingBackground.SetActive(false);  
+        movingBackground.SetActive(false);
+        Physics2D.IgnoreLayerCollision(PlayerCollision.playerLayer, PlayerCollision.enemyLayer, true);
+        Physics2D.IgnoreLayerCollision(PlayerCollision.playerLayer, PlayerCollision.obstacleLayer, true);
     }
 }

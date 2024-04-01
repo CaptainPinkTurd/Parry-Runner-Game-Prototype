@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class EnemySpawner : Spawner
 {
-    private float spawnRate = 2f;
+    private float spawnRate = 1f;
     public static EnemySpawner Instance { get; private set; }
     public static string groundTypeEnemy = "Ground Type Enemy";
     public static string airTypeEnemy = "Air Type Enemy";

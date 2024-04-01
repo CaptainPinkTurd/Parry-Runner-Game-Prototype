@@ -26,6 +26,7 @@ public class PlayerSpecialParry : BaseParry
 
         //Phase 4: setting up conditions upon exiting parry 
         StartCoroutine(TurnOffParryConditions(enemyObject));
+        GameManager.instance.score += 100;
     }
     protected override void ParryKnockBack(GameObject enemyObject)
     {

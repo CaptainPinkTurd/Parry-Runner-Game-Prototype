@@ -15,6 +15,7 @@ public class ExplosionForce2D : MonoBehaviour
             Physics2D.IgnoreCollision(obj, groundCollider);
             obj.gameObject.layer = 6;
             obj.attachedRigidbody.AddForce(dir.normalized * explosionForce, ForceMode2D.Impulse);
+            GameManager.instance.score += 20;
         }
     }
 }

@@ -44,7 +44,7 @@ public class PlayerJump : SaiMonoBehavior
         }
         else 
         {
-            if(rb.velocity.y <= 8) canJump = true; //double jump delay for snappier jump
+            if(rb.velocity.y <= 9) canJump = true; //double jump delay for snappier jump
 
             if (rb.velocity.y <= fallVelocityLimit)
             {

@@ -5,27 +5,15 @@ using UnityEngine;
 
 public class MoveLeft : MonoBehaviour
 {
-    [SerializeField] protected float speed;
+    [SerializeField] internal float speed;
     [SerializeField] private InCameraDetector inCamera;
+    internal static float speedOvertime = 5;
     void Update()
     {
         TranslateLeft();
     }
     protected virtual void TranslateLeft()
     {
-        //if (transform.parent.gameObject.name == "Background")
-        //{
-        //    transform.parent.Translate(Vector2.left * speed * Time.deltaTime, Space.World);
-        //    return;
-        //}
-        //if (inCamera.isOnScreen)
-        //{
-        //    transform.parent.Translate(Vector2.left * speed * Time.deltaTime, Space.World);
-        //}
-        //else
-        //{
-        //    transform.parent.Translate(Vector2.left * speed * Time.unscaledDeltaTime, Space.World);
-        //}
-        transform.parent.Translate(Vector2.left * speed * Time.deltaTime, Space.World);
+        transform.parent.Translate(Vector2.left * (speed + speedOvertime) * Time.deltaTime, Space.World);
     }
 }

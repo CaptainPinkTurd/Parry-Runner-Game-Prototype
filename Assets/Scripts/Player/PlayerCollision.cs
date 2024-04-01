@@ -6,11 +6,15 @@ using UnityEngine;
 public class PlayerCollision : SaiMonoBehavior
 {
     [SerializeField] PlayerController playerController;
-    private const int enemyLayer = 7;
-    private const int obstacleLayer = 8;
+    internal static int enemyLayer { get; private set; }
+    internal static int playerLayer { get; private set; }
+    internal static int obstacleLayer { get; private set; }
     internal bool allowCollision;
     protected override void LoadComponentsAndValues()
     {
+        playerLayer = 6;
+        enemyLayer = 7;
+        obstacleLayer = 8;
         playerController = GetComponentInParent<PlayerController>();        
     }
     private void OnCollisionEnter2D(Collision2D collision)
