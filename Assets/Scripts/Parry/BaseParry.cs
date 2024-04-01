@@ -22,7 +22,7 @@ public abstract class BaseParry : SaiMonoBehavior
     internal bool gotSpecialParried; //check if the enemy got special parried 
 
     [Header("Parry Related Conditions")]
-    internal int parryCounter = 0;
+    internal int parryCounter = 8;
     protected const int enemyLayer = 7;
     protected const int playerLayer = 6;
 
@@ -42,6 +42,7 @@ public abstract class BaseParry : SaiMonoBehavior
         if (Input.GetKeyDown(KeyCode.Space) && !isParry)
         {
             currentParryState = StartCoroutine(EnterParryState());
+            AudioManager.instance.Play("Poise");
         }
     }
     protected abstract IEnumerator EnterParryState();

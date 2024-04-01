@@ -7,7 +7,7 @@ public class PlayerJump : SaiMonoBehavior
     [Header("Jump Mechanic")]
     [SerializeField] Rigidbody2D rb;
     [SerializeField] float jumpForce;
-    private float fallForce = 37.5f;
+    private float fallForce = 35f;
     private int numberOfJump;
     internal bool isJump = false;
     private bool canJump = false;
@@ -38,6 +38,7 @@ public class PlayerJump : SaiMonoBehavior
         {
             canJump = false;
             isJump = false;
+            AudioManager.instance.Play("Jump");
             if (numberOfJump == 1) rb.velocity = Vector2.zero; //reseting inertia
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             numberOfJump--;

@@ -32,6 +32,7 @@ public class BaseEnemy : SaiMonoBehavior
             PlayerController.instance.playerSpecialParry.gotSpecialParried)
         {
             print("Boom");
+            AudioManager.instance.Play("Explosion");
             PlayerController.instance.playerSpecialParry.gotSpecialParried = false;
             LayerMask enemyMask = LayerMask.GetMask("Enemy");
             ExplosionForce2D.Explosion2D(100, gameObject, 50, enemyMask);

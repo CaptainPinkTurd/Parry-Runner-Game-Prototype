@@ -18,6 +18,7 @@ public class PlayerSpecialParry : BaseParry
 
         //Phase 2: initiating the attack animation
         isSpecialParry = true;
+        AudioManager.instance.Play("CounterSlash");
 
         yield return new WaitForSeconds(0.09f);
 

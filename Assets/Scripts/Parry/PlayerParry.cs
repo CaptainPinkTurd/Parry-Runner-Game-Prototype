@@ -30,6 +30,7 @@ public class PlayerParry : BaseParry
 
         //Phase 2: initiating the attack animation and stopping the game for a moment to emphasize the effect
         isCounter = true; //cue for counter attack animation
+        AudioManager.instance.Play("CounterSlash");
         if (!consecutiveParry && !PlayerController.instance.playerZone.inZone) HitStop.instance.Stop(0.125f);
         //hit stop shouldn't occur when player is in zone 
 
