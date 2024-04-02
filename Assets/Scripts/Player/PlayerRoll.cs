@@ -9,6 +9,7 @@ public class PlayerRoll : SaiMonoBehavior
     internal bool isRolling = false;
     private int rollDir = 0;
     private float rollSpeed = 0.5f;
+    private bool playSFX = false;
 
     protected override void LoadComponentsAndValues()
     {
@@ -51,6 +52,11 @@ public class PlayerRoll : SaiMonoBehavior
         Physics2D.IgnoreLayerCollision(6, 8, true);
         transform.parent.position = Vector2.MoveTowards(
             transform.parent.position, rollPos[rollDir].transform.position, rollSpeed);
+        if (!playSFX)
+        {
+            AudioManager.instance.Play("Dash");
+            playSFX = true;
+        }
 
         StopRolling();
     }
@@ -58,6 +64,7 @@ public class PlayerRoll : SaiMonoBehavior
     {
         if (transform.parent.position == rollPos[rollDir].transform.position)
         {
+            playSFX = false;
             isRolling = false;
             Physics2D.IgnoreLayerCollision(6, 7, false);
             Physics2D.IgnoreLayerCollision(6, 8, false);

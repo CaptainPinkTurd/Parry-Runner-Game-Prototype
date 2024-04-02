@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class EnemySpawner : Spawner
 {
-    private float spawnRate = 1f;
+    internal static float spawnRate = 2.5f;
     public static EnemySpawner Instance { get; private set; }
     public static string groundTypeEnemy = "Ground Type Enemy";
     public static string airTypeEnemy = "Air Type Enemy";
@@ -12,6 +12,7 @@ public class EnemySpawner : Spawner
     {
         base.Awake();
         if (EnemySpawner.Instance != null) Debug.LogError("Only 1 EnemySpawner allow to exist");
+        spawnRate = 2.5f;
         Instance = this;
     }
     private void OnEnable()

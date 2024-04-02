@@ -38,6 +38,7 @@ public class PlayerParry : BaseParry
 
         //Phase 3: obliterating the enemy
         ParryKnockBack(enemyObject);
+        enemyObject.GetComponentInChildren<SpriteRenderer>().color = Color.green;
 
         //Phase 4: setting up conditions upon exiting parry 
         StartCoroutine(TurnOffParryConditions(enemyObject));
@@ -56,6 +57,9 @@ public class PlayerParry : BaseParry
         CheckIfConsecutiveParry();
         PlayerController.instance.playerRb.constraints &= ~RigidbodyConstraints2D.FreezePositionY; //disable freeze pos at y
         PlayerController.instance.playerCollision.allowCollision = false; //turn on player vulnerability again
+
+        if (PlayerController.instance.playerZone.inZone) yield break;
+        DifficultyScaling.Instance.DifficultyIncrease(); //increase difficulty after a successful parry
     }
     protected override void ParryKnockBack(GameObject enemyObject)
     {

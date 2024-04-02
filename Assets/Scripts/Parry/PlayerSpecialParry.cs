@@ -24,9 +24,11 @@ public class PlayerSpecialParry : BaseParry
 
         //Phase 3: obliterating the enemy
         ParryKnockBack(enemyObject);
+        enemyObject.GetComponentInChildren<SpriteRenderer>().color = Color.green;
 
         //Phase 4: setting up conditions upon exiting parry 
         StartCoroutine(TurnOffParryConditions(enemyObject));
+        DifficultyScaling.Instance.DifficultyDecrease();
         GameManager.instance.score += 100;
     }
     protected override void ParryKnockBack(GameObject enemyObject)

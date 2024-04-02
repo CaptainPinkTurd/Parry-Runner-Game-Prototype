@@ -786,6 +786,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 14
   inCamera: {fileID: 82304797}
+  velocity: 0
 --- !u!1 &164364777
 GameObject:
   m_ObjectHideFlags: 0
@@ -1218,6 +1219,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   inCamera: {fileID: 0}
+  velocity: 0
 --- !u!114 &282169041
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1244,6 +1246,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   inCamera: {fileID: 0}
+  velocity: 0
 --- !u!1 &338084685
 GameObject:
   m_ObjectHideFlags: 0
@@ -1334,6 +1337,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 14
   inCamera: {fileID: 2131833090}
+  velocity: 0
 --- !u!1 &364884892
 GameObject:
   m_ObjectHideFlags: 0
@@ -2218,6 +2222,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 7
   inCamera: {fileID: 2046927659}
+  velocity: 0
 --- !u!1 &603341019
 GameObject:
   m_ObjectHideFlags: 0
@@ -2792,6 +2797,7 @@ GameObject:
   - component: {fileID: 749863058}
   - component: {fileID: 749863060}
   - component: {fileID: 749863061}
+  - component: {fileID: 749863062}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -2850,6 +2856,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b80fd2795c0c444fb844ce8c58c55c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &749863062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 749863057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ff05f1ce7003ce4fa608301157a3b25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scalingRate: 0.07
 --- !u!1 &816871808
 GameObject:
   m_ObjectHideFlags: 0
@@ -5062,6 +5081,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 7
   inCamera: {fileID: 1342622188}
+  velocity: 0
 --- !u!1 &1716059110
 GameObject:
   m_ObjectHideFlags: 0
@@ -5108,6 +5128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   inCamera: {fileID: 338084687}
+  velocity: 0
 --- !u!1 &1749188509
 GameObject:
   m_ObjectHideFlags: 0
@@ -5486,26 +5507,37 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 9ecca86c63a0ad9498dc0001fbff8cc9, type: 3}
     volume: 0.5
     pitch: 1.5
+    loop: 0
     source: {fileID: 0}
   - name: CounterSlash
     clip: {fileID: 8300000, guid: 8f44bb811f0efd04d875b99b1fe64172, type: 3}
     volume: 1
     pitch: 1.5
+    loop: 0
     source: {fileID: 0}
   - name: Explosion
     clip: {fileID: 8300000, guid: 5d11339980ff811488ba48af22d4aae2, type: 3}
     volume: 1
     pitch: 1
+    loop: 0
     source: {fileID: 0}
   - name: Jump
     clip: {fileID: 8300000, guid: 700d412286a4e0543a3833f988d32328, type: 3}
     volume: 1
     pitch: 1
+    loop: 0
     source: {fileID: 0}
   - name: Jump2
     clip: {fileID: 8300000, guid: 332092b88c74ce0489940e1855d1d0af, type: 3}
     volume: 1
     pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Dash
+    clip: {fileID: 8300000, guid: 344eafeb34355244a8f85f9aaeb54450, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
     source: {fileID: 0}
 --- !u!4 &1861355614
 Transform:
