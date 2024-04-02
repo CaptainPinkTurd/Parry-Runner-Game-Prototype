@@ -9,6 +9,7 @@ public class BaseEnemy : SaiMonoBehavior
     private Color originalColor;
     private void OnEnable()
     {
+        gameObject.transform.GetChild(1).gameObject.SetActive(true);
         gameObject.layer = PlayerCollision.enemyLayer;
         gameObject.GetComponent<Rigidbody2D>().collisionDetectionMode = CollisionDetectionMode2D.Discrete;
         gameObject.GetComponentInChildren<SpriteRenderer>().color = originalColor;
@@ -26,12 +27,6 @@ public class BaseEnemy : SaiMonoBehavior
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(gameObject.layer == 6 && collision.gameObject.layer == PlayerCollision.enemyLayer)
-        {
-            collision.gameObject.layer = PlayerCollision.playerLayer;
-            collision.gameObject.GetComponentInChildren<SpriteRenderer>().color = Color.green;
-            GameManager.instance.score += 20; //increase score if an enemy bump into another enemy
-        }
         if(gameObject.layer == 6 && collision.gameObject.layer == PlayerCollision.enemyLayer && 
             PlayerController.instance.playerSpecialParry.gotSpecialParried)
         {
@@ -40,8 +35,15 @@ public class BaseEnemy : SaiMonoBehavior
             PlayerController.instance.playerSpecialParry.gotSpecialParried = false;
             LayerMask enemyMask = LayerMask.GetMask("Enemy");
             ExplosionForce2D.Explosion2D(100, gameObject, 50, enemyMask);
-            ExplosionForce2D.Explosion2D(100, gameObject, 50, PlayerCollision.playerLayer);
             CameraShake.instance.ExplosionShake();
+        }
+        else if(gameObject.layer == 6 && collision.gameObject.layer == PlayerCollision.enemyLayer)
+        {
+            collision.transform.GetChild(1).gameObject.SetActive(false); 
+            //behaviors are usually second in enemy's child hierarchy
+            collision.gameObject.layer = PlayerCollision.playerLayer;
+            collision.gameObject.GetComponentInChildren<SpriteRenderer>().color = Color.green;
+            GameManager.instance.score += 20; //increase score if an enemy bump into another enemy
         }
     }
 }

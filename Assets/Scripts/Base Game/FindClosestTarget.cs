@@ -24,7 +24,7 @@ public class FindClosestTarget : MonoBehaviour
 
         foreach(BaseEnemy currentEnemy in allEnemies)
         {
-            if (currentEnemy == trackPosition.GetComponent<BaseEnemy>()) continue;
+            if (currentEnemy == trackPosition.GetComponent<BaseEnemy>() || currentEnemy.gameObject.layer != PlayerCollision.enemyLayer) continue;
             //skip the current iteration if the current enemy is the parried enemy
             float distanceToEnemy = (currentEnemy.transform.position - trackPosition.position).sqrMagnitude;
             if(distanceToEnemy < distanceToClosestEnemy)

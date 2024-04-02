@@ -36,6 +36,11 @@ public class PlayerFocusBar : MonoBehaviour
         if (currentMeter < focusBar.maxValue) return;
 
         PlayerController.instance.playerZone.inZone = true;
+        ExplosionForce2D.Explosion2D(100, gameObject, 50, LayerMask.GetMask("Enemy"));
+        CameraShake.instance.ExplosionShake();
+        DifficultyScaling.Instance.decreaseScaling = focusBar.maxValue / 2; 
+        DifficultyScaling.Instance.DifficultyDecrease();
+        MoveLeft.acceleration = 0; //reset pacing during zone
         StartCoroutine(BarCountDown());
     }
     private IEnumerator BarCountDown()

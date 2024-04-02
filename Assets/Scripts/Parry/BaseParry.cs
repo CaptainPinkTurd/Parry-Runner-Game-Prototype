@@ -22,7 +22,7 @@ public abstract class BaseParry : SaiMonoBehavior
     internal bool gotSpecialParried; //check if the enemy got special parried 
 
     [Header("Parry Related Conditions")]
-    internal int parryCounter = 10;
+    internal int parryCounter = 0;
     protected const int enemyLayer = 7;
     protected const int playerLayer = 6;
 

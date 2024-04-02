@@ -7,7 +7,9 @@ public class DifficultyScaling : SaiMonoBehavior
     public static DifficultyScaling Instance;   
     public float scalingRate = 0.05f;
     private float maxAcceleration = 7;
-    private float minSpawnRate = 1;
+    private float minSpawnRate = 0.85f;
+    internal float decreaseScaling;
+    private float currentAcceleration; 
     // Start is called before the first frame update
     protected override void Awake()
     {
@@ -16,10 +18,12 @@ public class DifficultyScaling : SaiMonoBehavior
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
-        print("Acceleration: " + MoveLeft.acceleration + "\nMax Acceleration: " + maxAcceleration);
-        //print("Normal Spawn Rate: " + EnemySpawner.spawnRate + "\nMin Spawn Rate: " + minSpawnRate);
+        //print("Acceleration: " + MoveLeft.acceleration + "\nMax Acceleration: " + maxAcceleration);
+        print("Normal Spawn Rate: " + EnemySpawner.spawnRate + "\nMin Spawn Rate: " + minSpawnRate);
+        if (PlayerController.instance.playerZone.inZone) return;
+        MoveLeft.acceleration = currentAcceleration;
     }
     internal void DifficultyIncrease()
     {
@@ -40,6 +44,7 @@ public class DifficultyScaling : SaiMonoBehavior
         {
             MoveLeft.acceleration = maxAcceleration;
         }
+        currentAcceleration = MoveLeft.acceleration;
     }
     private void SpawnRateIncrease()
     {
@@ -56,17 +61,18 @@ public class DifficultyScaling : SaiMonoBehavior
     {
         float speedChangeRatio = MoveLeft.acceleration / maxAcceleration;
 
-        MoveLeft.acceleration -= maxAcceleration * (1 - speedChangeRatio) * scalingRate * 5;
+        MoveLeft.acceleration -= maxAcceleration * (1 - speedChangeRatio) * scalingRate * decreaseScaling;
         if(MoveLeft.acceleration >= maxAcceleration)
         {
             MoveLeft.acceleration = maxAcceleration;
         }
+        currentAcceleration = MoveLeft.acceleration;
     }
     private void SpawnRateDecrease()
     {
         float spawnRateRatio = EnemySpawner.spawnRate / minSpawnRate;
 
-        EnemySpawner.spawnRate -= minSpawnRate * (1 - spawnRateRatio) * scalingRate * 5;
+        EnemySpawner.spawnRate -= minSpawnRate * (1 - spawnRateRatio) * scalingRate * decreaseScaling;
         if(EnemySpawner.spawnRate <= minSpawnRate)
         {
             EnemySpawner.spawnRate = minSpawnRate;

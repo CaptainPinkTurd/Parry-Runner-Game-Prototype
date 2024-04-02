@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.KeypadEnter))
         {
             SceneManager.LoadScene("SampleScene");
+            MoveLeft.acceleration = 0;
         }
         ScoreUpdate();
     }

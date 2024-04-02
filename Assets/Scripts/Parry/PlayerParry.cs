@@ -38,6 +38,7 @@ public class PlayerParry : BaseParry
 
         //Phase 3: obliterating the enemy
         ParryKnockBack(enemyObject);
+        enemyObject.transform.GetChild(1).gameObject.SetActive(false);
         enemyObject.GetComponentInChildren<SpriteRenderer>().color = Color.green;
 
         //Phase 4: setting up conditions upon exiting parry 
@@ -52,7 +53,7 @@ public class PlayerParry : BaseParry
         StopCoroutine(currentParryState); //stop the ongoing function of parry state, it will mess with the flow of the player functionality if left untouch 
         parryCollider.enabled = false;
 
-        yield return new WaitForSecondsRealtime(0.1f);
+        yield return new WaitForSeconds(0.1f);
         enemyObject.layer = playerLayer; //turn enemy into player's projectile after deflect them
         CheckIfConsecutiveParry();
         PlayerController.instance.playerRb.constraints &= ~RigidbodyConstraints2D.FreezePositionY; //disable freeze pos at y

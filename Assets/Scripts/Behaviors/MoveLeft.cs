@@ -15,7 +15,7 @@ public class MoveLeft : MonoBehaviour
     }
     protected virtual void TranslateLeft()
     {
-        velocity = speed + acceleration + 5;
+        velocity = speed + acceleration;
         transform.parent.Translate(Vector2.left * velocity * Time.deltaTime, Space.World);
     }
 }

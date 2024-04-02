@@ -13,13 +13,10 @@ public class ExplosionForce2D : MonoBehaviour
         {
             Vector2 dir = obj.transform.position - gameObject.transform.position;
             Physics2D.IgnoreCollision(obj, groundCollider);
-            if(obj.gameObject.layer != 6)
-            {
-                obj.gameObject.layer = 6;
-                GameManager.instance.score += 20;
-            }
+            obj.gameObject.layer = 6;
             obj.attachedRigidbody.AddForce(dir.normalized * explosionForce, ForceMode2D.Impulse);
             obj.GetComponentInChildren<SpriteRenderer>().color = Color.green;
+            GameManager.instance.score += 20;
         }
     }
 }

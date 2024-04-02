@@ -24,12 +24,11 @@ public class PlayerSpecialParry : BaseParry
 
         //Phase 3: obliterating the enemy
         ParryKnockBack(enemyObject);
+        enemyObject.transform.GetChild(1).gameObject.SetActive(false);
         enemyObject.GetComponentInChildren<SpriteRenderer>().color = Color.green;
 
         //Phase 4: setting up conditions upon exiting parry 
         StartCoroutine(TurnOffParryConditions(enemyObject));
-        DifficultyScaling.Instance.DifficultyDecrease();
-        GameManager.instance.score += 100;
     }
     protected override void ParryKnockBack(GameObject enemyObject)
     {
@@ -53,7 +52,6 @@ public class PlayerSpecialParry : BaseParry
     protected override IEnumerator TurnOffParryConditions(GameObject enemyObject)
     {
         enemyObject.layer = playerLayer; //turn on layer immediately to ensure the explosion collision
-
         yield return new WaitForSeconds(0.1f);
         isSpecialParry = false;
         PlayerController.instance.playerRb.constraints &= ~RigidbodyConstraints2D.FreezePositionY; //disable freeze pos at y
