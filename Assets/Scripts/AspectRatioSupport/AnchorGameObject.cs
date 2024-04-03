@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using Unity.VisualScripting;
 
 [ExecuteInEditMode]
 public class AnchorGameObject : MonoBehaviour
@@ -25,10 +26,20 @@ public class AnchorGameObject : MonoBehaviour
     IEnumerator updateAnchorRoutine; //Coroutine handle so we don't start it if it's already running
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
         updateAnchorRoutine = UpdateAnchorAsync();
         StartCoroutine(updateAnchorRoutine);
+    }
+    private void OnEnable()
+    {
+        StartCoroutine(ResetAnchor());
+    }
+    IEnumerator ResetAnchor()
+    {
+        executeInUpdate = true;
+        yield return new WaitForSeconds(0.1f);
+        executeInUpdate = false;
     }
 
     /// <summary>
