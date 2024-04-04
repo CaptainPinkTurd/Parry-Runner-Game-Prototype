@@ -27,7 +27,7 @@ public class PlayerJump : SaiMonoBehavior
     }
     internal void CheckForJump()
     {
-        if (Input.GetKeyDown(KeyCode.W) && numberOfJump > 0 && canJump)
+        if ((Input.GetKeyDown(KeyCode.W) || SwipeControls.Instance.UpSwipe()) && numberOfJump > 0 && canJump)
         {
             isJump = true;
         }

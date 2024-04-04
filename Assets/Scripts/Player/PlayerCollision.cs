@@ -34,7 +34,7 @@ public class PlayerCollision : SaiMonoBehavior
         }
         if ((enemyObject.layer == enemyLayer && !allowCollision) || enemyObject.layer == obstacleLayer)
         {
-            //playerController.playerDeath.isDead = true;
+            playerController.playerDeath.isDead = true;
         }
     }
 

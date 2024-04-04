@@ -40,6 +40,6 @@ public class GameManager : MonoBehaviour
     {
         if (PlayerController.instance.playerDeath.isDead) return;
 
-        //score += movement.velocity * Time.deltaTime;
+        score += movement.velocity * Time.deltaTime;
     }
 }

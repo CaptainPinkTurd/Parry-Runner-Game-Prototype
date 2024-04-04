@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class MoveLeft : MonoBehaviour
 {
-    [SerializeField] internal float speed;
+    [SerializeField] private float speed;
     [SerializeField] private InCameraDetector inCamera;
     internal static float acceleration = 0;
     public float velocity;

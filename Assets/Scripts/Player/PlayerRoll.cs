@@ -30,13 +30,13 @@ public class PlayerRoll : SaiMonoBehavior
     {
         if (isRolling) return; 
 
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.D) || SwipeControls.Instance.RightSwipe())
         {
             rollDir++;
             CheckRollLimit();
             isRolling = true;
         }
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.A) || SwipeControls.Instance.LeftSwipe())
         {
             rollDir--;
             CheckRollLimit();

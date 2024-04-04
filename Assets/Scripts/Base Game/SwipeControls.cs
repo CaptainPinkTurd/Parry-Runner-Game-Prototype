@@ -1,11 +1,22 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 public class SwipeControls : MonoBehaviour
 {
+    public static SwipeControls Instance;
     private Vector2 startTouchPosition;
     private Vector2 endTouchPosition;
+    private bool isTap;
+    private bool isUpSwipe;
+    private bool isRightSwipe;
+    private bool isLeftSwipe;
+
+    private void Start()
+    {
+        Instance = this;    
+    }
     private void Update()
     {
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
@@ -22,43 +33,63 @@ public class SwipeControls : MonoBehaviour
             {
                 if (inputVector.x > 0)
                 {
-                    RightSwipe();
+                    isRightSwipe = true;
                 }
                 else
                 {
-                    LeftSwipe();
+                    isLeftSwipe = true;
                 }
             }
             else
             {
                 if (inputVector.y > 0)
                 {
-                    UpSwipe();
+                    isUpSwipe = true;
+                }
+                else if (inputVector.y < 0)
+                {
+                    DownSwipe();
                 }
                 else
                 {
-                    DownSwipe();
+                    isTap = true;
                 }
             }
         }
 
     }
 
-    private void UpSwipe()
+    internal bool Tap()
     {
-        print("up");
+        if (!isTap) return false;
+
+        isTap = false;
+        return true;
     }
-    private void DownSwipe()
+    internal bool UpSwipe()
     {
-        print("down");
+        if (!isUpSwipe) return false;
+
+        isUpSwipe = false;
+        return true;
     }
-    private void LeftSwipe()
+    internal bool DownSwipe()
     {
-        print("left");
+        return true;
     }
-    private void RightSwipe()
+    internal bool LeftSwipe()
     {
-        print("right");
+        if (!isLeftSwipe) return false;
+
+        isLeftSwipe = false;
+        return true;
+    }
+    internal bool RightSwipe()
+    {
+        if (!isRightSwipe) return false;
+
+        isRightSwipe = false;
+        return true;
     }
 
 }

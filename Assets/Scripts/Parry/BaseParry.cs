@@ -39,7 +39,7 @@ public abstract class BaseParry : SaiMonoBehavior
     }
     internal virtual void CheckForParry()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && !isParry)
+        if ((Input.GetKeyDown(KeyCode.Space) || SwipeControls.Instance.Tap()) && !isParry)
         {
             currentParryState = StartCoroutine(EnterParryState());
             AudioManager.instance.Play("Poise");
