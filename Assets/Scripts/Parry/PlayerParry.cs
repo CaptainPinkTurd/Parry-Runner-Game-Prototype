@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlayerParry : BaseParry
@@ -43,7 +44,7 @@ public class PlayerParry : BaseParry
 
         //Phase 4: setting up conditions upon exiting parry 
         StartCoroutine(TurnOffParryConditions(enemyObject));
-        GameManager.instance.score += 50;
+        GameManager.instance.ScoreUpEffect(50, enemyObject.transform);
         parryCounter++;
     }
     protected override IEnumerator TurnOffParryConditions(GameObject enemyObject)

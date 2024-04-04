@@ -28,7 +28,7 @@ public class PlayerCollision : SaiMonoBehavior
         if (playerController.playerZone.inZone && enemyObject.layer == enemyLayer && !allowCollision)
         {
             StartCoroutine(playerController.playerSpecialParry.Parry(enemyObject));
-            GameManager.instance.score += 100;
+            GameManager.instance.ScoreUpEffect(100, enemyObject.transform);
             print("Forced Special parry");
             return;
         }
@@ -43,7 +43,7 @@ public class PlayerCollision : SaiMonoBehavior
         if (PlayerController.instance.playerZone.justEnded)
         {
             StartCoroutine(playerController.playerSpecialParry.Parry(collision.gameObject));
-            GameManager.instance.score += 500;
+            GameManager.instance.ScoreUpEffect(500, collision.transform);
             print("Intentional Special Parry");
             return;
         }

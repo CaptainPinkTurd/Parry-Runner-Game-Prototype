@@ -16,10 +16,13 @@ public class BaseEnemy : SaiMonoBehavior
     }
     override protected void Awake()
     {
+        print("Instanstiating");
+        transform.GetComponentInChildren<SpriteRenderer>().sortingLayerName = "Visible";
+        transform.GetComponentInChildren<SpriteRenderer>().sortingOrder = 1;
         originalColor = gameObject.GetComponentInChildren<SpriteRenderer>().color;
-        inCamera = GetComponentInChildren<InCameraDetector>();      
+        inCamera = GetComponentInChildren<InCameraDetector>();
     }
-
+ 
     // Update is called once per frame
     void Update()
     {
@@ -43,7 +46,7 @@ public class BaseEnemy : SaiMonoBehavior
             //behaviors are usually second in enemy's child hierarchy
             collision.gameObject.layer = PlayerCollision.playerLayer;
             collision.gameObject.GetComponentInChildren<SpriteRenderer>().color = Color.green;
-            GameManager.instance.score += 20; //increase score if an enemy bump into another enemy
+            GameManager.instance.ScoreUpEffect(20, collision.transform); //increase score if an enemy bump into another enemy
         }
     }
 }

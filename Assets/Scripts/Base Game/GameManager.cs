@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,6 +10,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     private MoveLeft movement;
     internal float score;
+    [SerializeField] protected GameObject scorePopsUp;
     // Start is called before the first frame update
     void Start()
     {
@@ -41,5 +43,13 @@ public class GameManager : MonoBehaviour
         if (PlayerController.instance.playerDeath.isDead) return;
 
         score += movement.velocity * Time.deltaTime;
+    }
+    internal void ScoreUpEffect(int score, Transform spawnPos)
+    {
+        GameObject popsUpEffect = Instantiate(scorePopsUp,
+            spawnPos.position + new Vector3(-0.25f, 1.5f, 0), Quaternion.identity);
+        popsUpEffect.GetComponentInChildren<TMP_Text>().text = "+" + score.ToString();
+        GameManager.instance.score += score;
+        Destroy(popsUpEffect, 1.5f);
     }
 }
