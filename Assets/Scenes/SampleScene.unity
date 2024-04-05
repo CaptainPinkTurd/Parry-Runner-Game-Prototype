@@ -1728,8 +1728,8 @@ GameObject:
   - component: {fileID: 519420029}
   - component: {fileID: 519420033}
   - component: {fileID: 519420034}
-  - component: {fileID: 519420035}
   - component: {fileID: 519420036}
+  - component: {fileID: 519420037}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1853,19 +1853,6 @@ MonoBehaviour:
   _limitMagnitude: 0
   _positionalMagnitudeLimit: 10
   _rotationalMagnitudeLimit: 3
---- !u!114 &519420035
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4faa639de004b7a4d9b1815eccd43aeb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  explosionShake: {fileID: 11400000, guid: c2c4b64617ff11048bb81b7f02906835, type: 2}
 --- !u!114 &519420036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1883,6 +1870,19 @@ MonoBehaviour:
   constraint: 0
   camera: {fileID: 519420031}
   executeInUpdate: 1
+--- !u!114 &519420037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4faa639de004b7a4d9b1815eccd43aeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionShake: {fileID: 11400000, guid: c2c4b64617ff11048bb81b7f02906835, type: 2}
 --- !u!1 &533695782
 GameObject:
   m_ObjectHideFlags: 0
@@ -2699,9 +2699,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 426988989
+  m_SortingLayer: 1
+  m_SortingOrder: 1
   m_Sprite: {fileID: 587555087, guid: 29e21165cb3ae334d969d4be634eaa9e, type: 3}
   m_Color: {r: 0.764151, g: 0.764151, b: 0.764151, a: 1}
   m_FlipX: 0
@@ -2723,6 +2723,7 @@ GameObject:
   m_Component:
   - component: {fileID: 734084603}
   - component: {fileID: 734084604}
+  - component: {fileID: 734084605}
   m_Layer: 7
   m_Name: Model
   m_TagString: Untagged
@@ -2797,6 +2798,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &734084605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 734084602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1668e20ecaba69547a8a160014c5640b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shakerType: 1
+  _positionalMultiplier: 2
+  _rotationalMultiplier: 1
+  _requireInView: 1
+  _includeChildren: 0
+  _ignoreSelf: 0
+  _includeInactive: 0
+  _localizeShake: 1
+  _randomizeDirections: 1
 --- !u!1 &737125968
 GameObject:
   m_ObjectHideFlags: 0
@@ -3040,6 +3062,7 @@ GameObject:
   m_Component:
   - component: {fileID: 843659134}
   - component: {fileID: 843659135}
+  - component: {fileID: 843659136}
   m_Layer: 7
   m_Name: Model
   m_TagString: Untagged
@@ -3114,6 +3137,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &843659136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 843659133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1668e20ecaba69547a8a160014c5640b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shakerType: 1
+  _positionalMultiplier: 2
+  _rotationalMultiplier: 1
+  _requireInView: 1
+  _includeChildren: 0
+  _ignoreSelf: 0
+  _includeInactive: 0
+  _localizeShake: 1
+  _randomizeDirections: 1
 --- !u!1 &888457465
 GameObject:
   m_ObjectHideFlags: 0
@@ -4942,8 +4986,9 @@ GameObject:
   - component: {fileID: 1632842915}
   - component: {fileID: 1632842917}
   - component: {fileID: 1632842916}
+  - component: {fileID: 1632842918}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: SlowMoPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4958,8 +5003,8 @@ RectTransform:
   m_GameObject: {fileID: 1632842914}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1967130572}
   m_RootOrder: 1
@@ -5007,6 +5052,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1632842914}
   m_CullTransparentMesh: 1
+--- !u!225 &1632842918
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1632842914}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 1
 --- !u!1 &1637015812
 GameObject:
   m_ObjectHideFlags: 0
@@ -5487,6 +5544,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1789451690}
   - component: {fileID: 1789451691}
+  - component: {fileID: 1789451692}
   m_Layer: 7
   m_Name: Model
   m_TagString: Untagged
@@ -5561,6 +5619,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1789451692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789451689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1668e20ecaba69547a8a160014c5640b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shakerType: 1
+  _positionalMultiplier: 2
+  _rotationalMultiplier: 1
+  _requireInView: 1
+  _includeChildren: 0
+  _ignoreSelf: 0
+  _includeInactive: 0
+  _localizeShake: 1
+  _randomizeDirections: 1
 --- !u!1 &1794796734
 GameObject:
   m_ObjectHideFlags: 0
@@ -6608,6 +6687,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2137638331}
   - component: {fileID: 2137638330}
+  - component: {fileID: 2137638332}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -6682,3 +6762,24 @@ Transform:
   m_Father: {fileID: 1128867185}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2137638332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2137638329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1668e20ecaba69547a8a160014c5640b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shakerType: 1
+  _positionalMultiplier: 2
+  _rotationalMultiplier: 1
+  _requireInView: 1
+  _includeChildren: 0
+  _ignoreSelf: 0
+  _includeInactive: 0
+  _localizeShake: 1
+  _randomizeDirections: 1

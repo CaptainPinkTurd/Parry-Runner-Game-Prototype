@@ -86,7 +86,7 @@ public class LockOnAttack : SaiMonoBehavior
     }
     private IEnumerator SetAlert()
     {
-        yield return new WaitForSecondsRealtime(2.5f);
+        yield return new WaitForSecondsRealtime(2.25f);
         StartCoroutine(Alert());
     }
 }

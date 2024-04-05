@@ -7,7 +7,7 @@ public class MoveLeft : MonoBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] private InCameraDetector inCamera;
-    internal static float acceleration = 0;
+    internal static float acceleration = 10;
     public float velocity;
     void Update()
     {

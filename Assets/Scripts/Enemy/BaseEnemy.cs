@@ -1,5 +1,8 @@
+using FirstGearGames.SmoothCameraShaker;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
@@ -16,13 +19,28 @@ public class BaseEnemy : SaiMonoBehavior
     }
     override protected void Awake()
     {
-        print("Instanstiating");
+        AddShakableProperties();
         transform.GetComponentInChildren<SpriteRenderer>().sortingLayerName = "Visible";
         transform.GetComponentInChildren<SpriteRenderer>().sortingOrder = 1;
         originalColor = gameObject.GetComponentInChildren<SpriteRenderer>().color;
         inCamera = GetComponentInChildren<InCameraDetector>();
     }
- 
+
+    private void AddShakableProperties()
+    {
+        //var shakable = transform.GetChild(0).AddComponent<ShakableTransform2D>();
+        //shakable._shakerType = ShakableBase.ShakerTypes.ObjectShaker;
+        //shakable._localizeShake = true;
+        //shakable._positionalMultiplier *= 5;
+
+        var objectShaker = transform.GetChild(0).AddComponent<ObjectShaker>();
+        objectShaker._shakeOnEnable = Resources.Load<ShakeData>("ScriptableObjects/CounterShake");
+        objectShaker.enabled = false;
+
+        var shakeScript = transform.GetChild(0).AddComponent<ParryShake>();
+        shakeScript.parryShake = objectShaker;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -38,6 +56,7 @@ public class BaseEnemy : SaiMonoBehavior
             PlayerController.instance.playerSpecialParry.gotSpecialParried = false;
             LayerMask enemyMask = LayerMask.GetMask("Enemy");
             ExplosionForce2D.Explosion2D(100, gameObject, 50, enemyMask);
+            UIController.instance.slowMoPanel.SetActive(false);
             CameraShake.instance.ExplosionShake();
         }
         else if(gameObject.layer == 6 && collision.gameObject.layer == PlayerCollision.enemyLayer)
@@ -46,7 +65,7 @@ public class BaseEnemy : SaiMonoBehavior
             //behaviors are usually second in enemy's child hierarchy
             collision.gameObject.layer = PlayerCollision.playerLayer;
             collision.gameObject.GetComponentInChildren<SpriteRenderer>().color = Color.green;
-            GameManager.instance.ScoreUpEffect(20, collision.transform); //increase score if an enemy bump into another enemy
+            GameManager.instance.ScoreUp(20, collision.transform); //increase score if an enemy bump into another enemy
         }
     }
 }

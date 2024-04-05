@@ -16,6 +16,7 @@ public class PlayerZoneMode : MonoBehaviour
     private void OnZoneMode()
     {
         if (!inZone || zoneModeUpdateOff) return;
+        UIController.instance.slowMoPanel.SetActive(true);  
         Time.timeScale = 0.5f;
         EnemySpawner.Instance.enabled = false;
         ObstacleSpawner.Instance.enabled = false;
@@ -23,7 +24,7 @@ public class PlayerZoneMode : MonoBehaviour
     }
     private void OnZoneModeExit()
     {
-        if (inZone || PlayerController.instance.playerParry.isCounter) return; 
+        if (inZone || PlayerController.instance.playerParry.isCounter) return;
         //isCounter is used to prevent hitstop from being interrupted
         Time.timeScale = 1;
         EnemySpawner.Instance.enabled = true;

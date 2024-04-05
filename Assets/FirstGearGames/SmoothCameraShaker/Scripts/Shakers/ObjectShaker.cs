@@ -70,7 +70,7 @@ namespace FirstGearGames.SmoothCameraShaker
         [Tooltip("ShakeData to run when enabled. Leave empty to not use this feature.")]
         [Space(10)]
         [SerializeField]
-        private ShakeData _shakeOnEnable = null;
+        internal ShakeData _shakeOnEnable = null;
         #endregion
 
         #region Private.

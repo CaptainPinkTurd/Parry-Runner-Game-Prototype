@@ -16,7 +16,7 @@ public class ExplosionForce2D : MonoBehaviour
             obj.gameObject.layer = 6;
             obj.attachedRigidbody.AddForce(dir.normalized * explosionForce, ForceMode2D.Impulse);
             obj.GetComponentInChildren<SpriteRenderer>().color = Color.green;
-            GameManager.instance.ScoreUpEffect(20, obj.transform);
+            GameManager.instance.ScoreUp(20, obj.transform);
         }
     }
 }

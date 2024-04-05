@@ -51,7 +51,7 @@ public class DifficultyScaling : SaiMonoBehavior
         float spawnRateRatio = EnemySpawner.spawnRate / minSpawnRate; 
         //ratio is negative that's why addition was used
 
-        EnemySpawner.spawnRate += minSpawnRate * (1 - spawnRateRatio) * scalingRate * 1.5f;
+        EnemySpawner.spawnRate += minSpawnRate * (1 - spawnRateRatio) * scalingRate * 2;
         if(EnemySpawner.spawnRate <= minSpawnRate)
         {
             EnemySpawner.spawnRate = minSpawnRate;
@@ -72,7 +72,7 @@ public class DifficultyScaling : SaiMonoBehavior
     {
         float spawnRateRatio = EnemySpawner.spawnRate / minSpawnRate;
 
-        EnemySpawner.spawnRate -= minSpawnRate * (1 - spawnRateRatio) * scalingRate * decreaseScaling;
+        EnemySpawner.spawnRate -= minSpawnRate * (1 - spawnRateRatio) * scalingRate * decreaseScaling * 1.5f;
         if(EnemySpawner.spawnRate <= minSpawnRate)
         {
             EnemySpawner.spawnRate = minSpawnRate;

@@ -13,11 +13,6 @@ public class CameraShake : MonoBehaviour
         instance = this;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     internal void ExplosionShake()
     {
         CameraShakerHandler.Shake(explosionShake);

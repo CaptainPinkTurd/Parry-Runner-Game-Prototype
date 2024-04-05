@@ -1,3 +1,4 @@
+using FirstGearGames.SmoothCameraShaker;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -17,7 +18,7 @@ public class PlayerParry : BaseParry
         parryCollider.enabled = false;
         if (!isCounter) consecutiveParry = false; //if isn't countering anything, then turn off consecutive parry flow
 
-        yield return new WaitForSecondsRealtime(0.64f);
+        yield return new WaitForSecondsRealtime(parryDuration);
 
         isParry = false;
     }
@@ -32,10 +33,24 @@ public class PlayerParry : BaseParry
         //Phase 2: initiating the attack animation and stopping the game for a moment to emphasize the effect
         isCounter = true; //cue for counter attack animation
         AudioManager.instance.Play("CounterSlash");
-        if (!consecutiveParry && !PlayerController.instance.playerZone.inZone) HitStop.instance.Stop(0.125f);
-        //hit stop shouldn't occur when player is in zone 
-
-        yield return new WaitForSeconds(0.09f);
+        if(!consecutiveParry && !PlayerController.instance.playerZone.inZone && parryCounter == 9)
+        {
+            var enemyShaker = enemyObject.GetComponentInChildren<ParryShake>();
+            HitStop.instance.Stop(0.125f);
+            yield return new WaitForSeconds(0.15f);
+            HitStop.instance.ParryStop(0.5f, enemyShaker);
+            yield return new WaitForSecondsRealtime(0.5f);
+        }
+        else if (!consecutiveParry && !PlayerController.instance.playerZone.inZone)
+        {
+            HitStop.instance.Stop(0.125f);
+            yield return new WaitForSeconds(0.09f);
+        }
+        else
+        {
+            //hit stop shouldn't occur when player is in zone 
+            yield return new WaitForSeconds(0.09f);
+        }
 
         //Phase 3: obliterating the enemy
         ParryKnockBack(enemyObject);
@@ -44,7 +59,7 @@ public class PlayerParry : BaseParry
 
         //Phase 4: setting up conditions upon exiting parry 
         StartCoroutine(TurnOffParryConditions(enemyObject));
-        GameManager.instance.ScoreUpEffect(50, enemyObject.transform);
+        GameManager.instance.ScoreUp(50, enemyObject.transform);
         parryCounter++;
     }
     protected override IEnumerator TurnOffParryConditions(GameObject enemyObject)

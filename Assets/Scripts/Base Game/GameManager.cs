@@ -44,12 +44,11 @@ public class GameManager : MonoBehaviour
 
         score += movement.velocity * Time.deltaTime;
     }
-    internal void ScoreUpEffect(int score, Transform spawnPos)
+    internal void ScoreUp(int score, Transform spawnPos)
     {
         GameObject popsUpEffect = Instantiate(scorePopsUp,
             spawnPos.position + new Vector3(-0.25f, 1.5f, 0), Quaternion.identity);
         popsUpEffect.GetComponentInChildren<TMP_Text>().text = "+" + score.ToString();
         GameManager.instance.score += score;
-        Destroy(popsUpEffect, 1.5f);
     }
 }
