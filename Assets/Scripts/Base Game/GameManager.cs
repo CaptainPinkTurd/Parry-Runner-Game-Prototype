@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.KeypadEnter) || (PlayerController.instance.playerDeath.isDead && SwipeControls.Instance.Tap()))
+        if (Input.GetKeyDown(KeyCode.KeypadEnter))
         {
             MoveLeft.acceleration = 0;
             SceneManager.LoadScene("SampleScene");

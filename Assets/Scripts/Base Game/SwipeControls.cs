@@ -29,14 +29,13 @@ public class SwipeControls : MonoBehaviour
             endTouchPosition = Input.GetTouch(0).position;
 
             Vector2 inputVector = endTouchPosition - startTouchPosition;
-            print("Start Touch Pos: " + startTouchPosition + "\nEnd Touch Pos: " + endTouchPosition);
             if (Mathf.Abs(inputVector.x) > Mathf.Abs(inputVector.y))
             {
-                if (inputVector.x >= 1)
+                if (inputVector.x > 0)
                 {
                     isRightSwipe = true;
                 }
-                else if (inputVector.x <= -1)
+                else
                 {
                     isLeftSwipe = true;
                 }
