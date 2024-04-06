@@ -12,7 +12,7 @@ public class EnemySpawner : Spawner
     {
         base.Awake();
         if (EnemySpawner.Instance != null) Debug.LogError("Only 1 EnemySpawner allow to exist");
-        spawnRate = 1f;
+        spawnRate = 2.5f;
         Instance = this;
     }
     private void OnEnable()

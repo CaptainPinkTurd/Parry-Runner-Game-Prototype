@@ -6,13 +6,14 @@ public class DifficultyScaling : SaiMonoBehavior
 {
     public static DifficultyScaling Instance;   
     public float scalingRate = 0.05f;
-    private float maxAcceleration = 7;
-    private float minSpawnRate = 0.8f;
+    private float maxAcceleration = 7.5f;
+    private float minSpawnRate = 0.75f;
     internal float decreaseScaling;
     private float currentAcceleration; 
     // Start is called before the first frame update
     protected override void Awake()
     {
+        //currentAcceleration = MoveLeft.acceleration;
         if (DifficultyScaling.Instance != null) Debug.LogError("Only 1 DifficultyScaling allow to exist");
         Instance = this;
     }
@@ -20,8 +21,8 @@ public class DifficultyScaling : SaiMonoBehavior
     // Update is called once per frame
     void Update()
     {
-        //print("Acceleration: " + MoveLeft.acceleration + "\nMax Acceleration: " + maxAcceleration);
-        //print("Normal Spawn Rate: " + EnemySpawner.spawnRate + "\nMin Spawn Rate: " + minSpawnRate);
+        print("Acceleration: " + MoveLeft.acceleration + "\nMax Acceleration: " + maxAcceleration);
+        print("Normal Spawn Rate: " + EnemySpawner.spawnRate + "\nMin Spawn Rate: " + minSpawnRate);
         if (PlayerController.instance.playerZone.inZone) return;
         MoveLeft.acceleration = currentAcceleration;
     }
