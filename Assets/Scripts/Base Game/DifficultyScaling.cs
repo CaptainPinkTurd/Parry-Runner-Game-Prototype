@@ -21,8 +21,8 @@ public class DifficultyScaling : SaiMonoBehavior
     // Update is called once per frame
     void Update()
     {
-        print("Acceleration: " + MoveLeft.acceleration + "\nMax Acceleration: " + maxAcceleration);
-        print("Normal Spawn Rate: " + EnemySpawner.spawnRate + "\nMin Spawn Rate: " + minSpawnRate);
+        //print("Acceleration: " + MoveLeft.acceleration + "\nMax Acceleration: " + maxAcceleration);
+        //print("Normal Spawn Rate: " + EnemySpawner.spawnRate + "\nMin Spawn Rate: " + minSpawnRate);
         if (PlayerController.instance.playerZone.inZone) return;
         MoveLeft.acceleration = currentAcceleration;
     }

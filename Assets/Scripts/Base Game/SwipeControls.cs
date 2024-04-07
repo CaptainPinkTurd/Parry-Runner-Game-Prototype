@@ -6,57 +6,100 @@ using UnityEngine.UI;
 public class SwipeControls : MonoBehaviour
 {
     public static SwipeControls Instance;
-    private Vector2 startTouchPosition;
-    private Vector2 endTouchPosition;
     private bool isTap;
     private bool isUpSwipe;
     private bool isRightSwipe;
     private bool isLeftSwipe;
+    private bool isHolding;
+    private Vector3 fp;   //First touch position
+    private Vector3 lp;   //Last touch position
+    private int holdFrameCount = 0;
+    private float dragDistance;  //minimum distance for a swipe to be registered
 
-    private void Start()
+    void Start()
     {
-        Instance = this;    
+        Instance = this;
+        dragDistance = Screen.height * 10 / 100; //dragDistance is 15% height of the screen
     }
-    private void Update()
+
+    void Update()
     {
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+        if(holdFrameCount >= 3 && !isHolding)
         {
-            startTouchPosition = Input.GetTouch(0).position;
+            AudioManager.instance.Play("Charged");
         }
-
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
+        if (Input.touchCount == 1) // user is touching the screen with a single touch
         {
-            endTouchPosition = Input.GetTouch(0).position;
-
-            Vector2 inputVector = endTouchPosition - startTouchPosition;
-            if (Mathf.Abs(inputVector.x) > Mathf.Abs(inputVector.y))
+            Touch touch = Input.GetTouch(0); // get the touch
+            if (touch.phase == TouchPhase.Began) //check for the first touch
             {
-                if (inputVector.x > 0)
+                fp = touch.position;
+                lp = touch.position;
+            }
+            else if (touch.phase == TouchPhase.Moved) // update the last position based on where they moved
+            {
+                lp = touch.position;
+            } 
+            else if(touch.phase == TouchPhase.Stationary)
+            {
+                holdFrameCount++; 
+                if(holdFrameCount >= 5)
                 {
-                    isRightSwipe = true;
-                }
-                else
-                {
-                    isLeftSwipe = true;
+                    //print("Current Frame Count: " + holdFrameCount);
+                    isHolding = true;
                 }
             }
-            else
+            else if (touch.phase == TouchPhase.Ended) //check if the finger is removed from the screen
             {
-                if (inputVector.y > 0)
-                {
-                    isUpSwipe = true;
-                }
-                else if (inputVector.y < 0)
-                {
-                    DownSwipe();
+                print("Release Frame Count: " + holdFrameCount);
+                lp = touch.position;  //last touch position. Ommitted if you use list
+                holdFrameCount = 0;
+
+                //Check if drag distance is greater than 20% of the screen height
+                if (Mathf.Abs(lp.x - fp.x) > dragDistance || Mathf.Abs(lp.y - fp.y) > dragDistance)
+                {//It's a drag
+                 //check if the drag is vertical or horizontal
+                    if (Mathf.Abs(lp.x - fp.x) > Mathf.Abs(lp.y - fp.y))
+                    {   //If the horizontal movement is greater than the vertical movement...
+                        if ((lp.x > fp.x))  //If the movement was to the right)
+                        {   //Right swipe
+                            isRightSwipe = true;
+
+                            if (!isHolding) return;
+
+                            isHolding = false;
+                            isTap = true;
+                        }
+                        else
+                        {   //Left swipe
+                            isLeftSwipe = true;
+
+                            if (!isHolding) return;
+
+                            isHolding = false;
+                            isTap = true;
+                        }
+                    }
+                    else
+                    {   //the vertical movement is greater than the horizontal movement
+                        if (lp.y > fp.y)  //If the movement was up
+                        {   //Up swipe
+                            isUpSwipe = true;
+                            Debug.Log("Up Swipe");
+                        }
+                        else
+                        {   //Down swipe
+                            Debug.Log("Down Swipe");
+                        }
+                    }
                 }
                 else
-                {
+                {   //It's a tap as the drag distance is less than 20% of the screen height
                     isTap = true;
+                    Debug.Log("Tap");
                 }
             }
         }
-
     }
 
     internal bool Tap()

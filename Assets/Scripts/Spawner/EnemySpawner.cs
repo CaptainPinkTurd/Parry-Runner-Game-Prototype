@@ -30,6 +30,13 @@ public class EnemySpawner : Spawner
             //spawnRate = PlayerController.instance.playerZone.inZone == true ? 0.75f : 2f;
             yield return new WaitForSeconds(spawnRate);
             Transform enemyPrefab = GetRandomPrefab();
+            if (GameManager.instance.score <= 700)
+            {
+                while (enemyPrefab.name == "DashSquare")
+                {
+                    enemyPrefab = GetRandomPrefab();
+                }
+            }
             Quaternion rotation = Quaternion.identity;
             Vector2 spawnPos = new Vector2(Random.Range(17, 19), Random.Range(-3, 4));
             Transform newEnemy = Spawn(enemyPrefab, spawnPos, rotation);
