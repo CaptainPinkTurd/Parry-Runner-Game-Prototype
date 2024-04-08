@@ -12,9 +12,10 @@ public class PlayerSpecialParry : BaseParry
     {
         if (enemyObject.layer != enemyLayer || PlayerController.instance.playerDeath.isDead) yield break;
 
-        //Phase 1: setting up player conditions for parry
+        //Phase 1: setting up conditions for parry
         PlayerController.instance.playerRb.constraints = RigidbodyConstraints2D.FreezeAll;
         PlayerController.instance.playerCollision.allowCollision = true;
+        EnemyDeath enemyDeath = enemyObject.GetComponent<EnemyDeath>();
 
         //Phase 2: initiating the attack animation
         isSpecialParry = true;
@@ -24,7 +25,7 @@ public class PlayerSpecialParry : BaseParry
 
         //Phase 3: obliterating the enemy
         ParryKnockBack(enemyObject);
-        enemyObject.transform.GetChild(1).gameObject.SetActive(false);
+        enemyDeath.isDead = true;
         enemyObject.GetComponentInChildren<SpriteRenderer>().color = Color.green;
 
         //Phase 4: setting up conditions upon exiting parry 

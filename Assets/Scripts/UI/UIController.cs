@@ -8,12 +8,14 @@ public class UIController : MonoBehaviour
 {
     public static UIController instance;
     private TMP_Text scoreText;
+    private TMP_Text highScoreText;
     internal GameObject slowMoPanel;
     // Start is called before the first frame update
     void Start()
     {
         instance = this;
         scoreText = GameObject.Find("Score Text").GetComponent<TMP_Text>();
+        highScoreText = GameObject.Find("HighScore Text").GetComponent<TMP_Text>();
         slowMoPanel = GameObject.Find("SlowMoPanel");
         slowMoPanel.SetActive(false);
     }
@@ -22,5 +24,6 @@ public class UIController : MonoBehaviour
     void Update()
     {
         scoreText.text = "Score: " + Mathf.FloorToInt(GameManager.instance.score);
+        highScoreText.text = "Best: " + GameManager.instance.highScore;
     }
 }

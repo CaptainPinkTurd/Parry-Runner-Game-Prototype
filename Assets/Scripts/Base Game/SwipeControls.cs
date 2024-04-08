@@ -24,7 +24,7 @@ public class SwipeControls : MonoBehaviour
 
     void Update()
     {
-        if(holdFrameCount >= 3 && !isHolding)
+        if(holdFrameCount >= 4 && !isHolding)
         {
             AudioManager.instance.Play("Charged");
         }

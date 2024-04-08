@@ -10,12 +10,14 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     private MoveLeft movement;
     internal float score;
+    internal int highScore;
     [SerializeField] protected GameObject scorePopsUp;
     // Start is called before the first frame update
     void Start()
     {
         instance = this;
         CollisionReset();
+        highScore = PlayerPrefs.GetInt("HighScore");
         movement = GameObject.Find("Background").GetComponentInChildren<MoveLeft>();
     }
 
@@ -40,6 +42,12 @@ public class GameManager : MonoBehaviour
     }
     private void ScoreUpdate()
     {
+        if (score > highScore)
+        {
+            highScore = Mathf.FloorToInt(score);
+            PlayerPrefs.SetInt("HighScore", highScore);
+        }
+
         if (PlayerController.instance.playerDeath.isDead) return;
 
         score += movement.velocity * Time.deltaTime;

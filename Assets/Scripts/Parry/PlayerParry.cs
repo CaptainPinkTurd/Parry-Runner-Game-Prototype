@@ -26,20 +26,21 @@ public class PlayerParry : BaseParry
     {
         if (enemyObject.layer != enemyLayer || PlayerController.instance.playerDeath.isDead) yield break;
 
-        //Phase 1: setting up player conditions for parry
+        //Phase 1: setting up conditions for parry
         PlayerController.instance.playerCollision.allowCollision = true; //player become immune to enemy contact
         PlayerController.instance.playerRb.constraints = RigidbodyConstraints2D.FreezeAll;
+        EnemyDeath enemyDeath = enemyObject.GetComponent<EnemyDeath>(); 
         
 
         //Phase 2: initiating the attack animation and stopping the game for a moment to emphasize the effect
         isCounter = true; //cue for counter attack animation
-
         yield return StartCoroutine(HitStopController(enemyObject)); 
         //wait until this coroutine is finished to continue with the function
 
+
         //Phase 3: obliterating the enemy
         ParryKnockBack(enemyObject);
-        enemyObject.transform.GetChild(1).gameObject.SetActive(false);
+        enemyDeath.isDead = true;
         enemyObject.GetComponentInChildren<SpriteRenderer>().color = Color.green;
 
         //Phase 4: setting up conditions upon exiting parry 

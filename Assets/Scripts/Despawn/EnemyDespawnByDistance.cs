@@ -1,9 +1,8 @@
-using Mono.Cecil;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyDespawn : DespawnByDistance
+public class EnemyDespawnByDistance : DespawnByDistance
 {
     protected override void DespawnObject()
     {
@@ -11,8 +10,8 @@ public class EnemyDespawn : DespawnByDistance
         if (enemySpawnerType.name == "NormalEnemySpawner")
         {
             EnemySpawner.Instance.Despawn(transform.parent);
-        } 
-        else if(enemySpawnerType.name == "ZoneEnemySpawner")
+        }
+        else if (enemySpawnerType.name == "ZoneEnemySpawner")
         {
             ZoneModeEnemySpawner.Instance.Despawn(transform.parent);
         }

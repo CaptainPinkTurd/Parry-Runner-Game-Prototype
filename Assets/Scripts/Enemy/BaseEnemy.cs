@@ -20,6 +20,7 @@ public class BaseEnemy : SaiMonoBehavior
     override protected void Awake()
     {
         AddShakableProperties();
+        transform.AddComponent<EnemyDeath>();
         transform.GetComponentInChildren<SpriteRenderer>().sortingLayerName = "Visible";
         transform.GetComponentInChildren<SpriteRenderer>().sortingOrder = 1;
         originalColor = gameObject.GetComponentInChildren<SpriteRenderer>().color;
