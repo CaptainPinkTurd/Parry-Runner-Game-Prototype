@@ -34,12 +34,10 @@ public class BaseEnemy : SaiMonoBehavior
         //shakable._localizeShake = true;
         //shakable._positionalMultiplier *= 5;
 
-        var objectShaker = transform.GetChild(0).AddComponent<ObjectShaker>();
-        objectShaker._shakeOnEnable = Resources.Load<ShakeData>("ScriptableObjects/CounterShake");
-        objectShaker.enabled = false;
+        //objectShaker._shakeOnEnable = Resources.Load<ShakeData>("ScriptableObjects/CounterShake");
+        //objectShaker.enabled = false;
 
-        var shakeScript = transform.GetChild(0).AddComponent<ParryShake>();
-        shakeScript.parryShake = objectShaker;
+        transform.GetChild(0).AddComponent<ParryShake>();
     }
 
     // Update is called once per frame
@@ -62,7 +60,8 @@ public class BaseEnemy : SaiMonoBehavior
         }
         else if(gameObject.layer == 6 && collision.gameObject.layer == PlayerCollision.enemyLayer)
         {
-            collision.transform.GetChild(1).gameObject.SetActive(false); 
+            EnemyDeath enemyDeath = collision.gameObject.GetComponent<EnemyDeath>();
+            enemyDeath.isDead = true;
             //behaviors are usually second in enemy's child hierarchy
             collision.gameObject.layer = PlayerCollision.playerLayer;
             collision.gameObject.GetComponentInChildren<SpriteRenderer>().color = Color.green;

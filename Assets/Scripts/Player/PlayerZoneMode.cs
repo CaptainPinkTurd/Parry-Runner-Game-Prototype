@@ -30,5 +30,9 @@ public class PlayerZoneMode : MonoBehaviour
         EnemySpawner.Instance.enabled = true;
         ObstacleSpawner.Instance.enabled = true;
         ZoneModeEnemySpawner.Instance.enabled = false;
+        if(UIController.instance.slowMoPanel.activeInHierarchy)
+        {
+            UIController.instance.slowMoPanel.SetActive(false);
+        }
     }
 }

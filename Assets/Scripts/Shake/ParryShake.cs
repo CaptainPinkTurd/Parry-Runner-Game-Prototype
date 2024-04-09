@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class ParryShake : MonoBehaviour
 {
-    [SerializeField] internal ObjectShaker parryShake;
+    internal ObjectShaker parryShake;
     // Start is called before the first frame update
     void Start()
     {
-
+        parryShake = GetComponent<ObjectShaker>(); 
     }
 
     private void OnDisable()

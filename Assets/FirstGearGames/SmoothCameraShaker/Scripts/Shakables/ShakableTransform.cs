@@ -179,7 +179,7 @@ namespace FirstGearGames.SmoothCameraShaker
                 _objectShaker = GetComponentInParent<ObjectShaker>();
                 if (_objectShaker == null)
                 {
-                    Debug.LogError("ObjectShaker could not be found on or above object " + gameObject.name + ". Shakable will be destroyed.", this);
+                    Debug.LogError("ObjectShaker could not be found on or above object " + gameObject.transform.parent.name + ". Shakable will be destroyed.", this);
                     DestroyImmediate(this);
                     return;
                 }

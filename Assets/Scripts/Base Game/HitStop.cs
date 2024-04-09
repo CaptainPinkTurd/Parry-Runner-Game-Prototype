@@ -17,14 +17,17 @@ public class HitStop : MonoBehaviour
         Time.timeScale = 0;
         StartCoroutine(Wait(duration)); 
     }
-    public void ParryStop(float duration, ParryShake enemyShaker)
+    public void ParryStop(float duration, List<ParryShake> enemiesShaker)
     {
         if(waiting) return;
 
         Time.timeScale = 0.1f;
         StartCoroutine(Wait(duration));
 
-        enemyShaker.StartParryShake();
+        foreach(var enemy in enemiesShaker)
+        {
+            enemy.StartParryShake();
+        }
     }
     IEnumerator Wait(float duration)
     {

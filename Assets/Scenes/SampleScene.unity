@@ -544,7 +544,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 84876612}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 18.510523, y: -0.9698973, z: -0.2420063}
+  m_LocalPosition: {x: 18.510523, y: -0.84614754, z: -0.2420063}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -601,7 +601,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.05090785, y: -0.49045992}
+  m_Offset: {x: -0.6319394, y: -1.1797237}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -612,7 +612,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.984241, y: 2.4729486}
+  m_Size: {x: 1.2753229, y: 1.0944209}
   m_EdgeRadius: 0
 --- !u!114 &84876617
 MonoBehaviour:
@@ -1191,7 +1191,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 268595990}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 13.07, y: 7.08, z: 0}
+  m_LocalPosition: {x: 18.43, y: 2.23, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1209,7 +1209,6 @@ GameObject:
   - component: {fileID: 282169039}
   - component: {fileID: 282169040}
   - component: {fileID: 282169041}
-  - component: {fileID: 282169042}
   m_Layer: 0
   m_Name: Moving Background
   m_TagString: Untagged
@@ -1259,21 +1258,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1990347bd63142542a3bde9e66608703, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &282169042
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 282169038}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb4bc1a5ae6d44a4891fc586e32b5673, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0
-  inCamera: {fileID: 0}
-  velocity: 0
 --- !u!1 &338084685
 GameObject:
   m_ObjectHideFlags: 0
@@ -2401,7 +2385,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 609785442}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9.985575, y: -1.0198685, z: -0.2420066}
+  m_LocalPosition: {x: 11.32, y: -1.0198685, z: -0.2420066}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2651,8 +2635,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 719379299}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3.5, z: 1}
+  m_LocalPosition: {x: -0.5976, y: -0.8578, z: 0}
+  m_LocalScale: {x: 1.8048, y: 1.7843001, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 84876613}
@@ -2721,6 +2705,7 @@ GameObject:
   - component: {fileID: 734084603}
   - component: {fileID: 734084604}
   - component: {fileID: 734084605}
+  - component: {fileID: 734084606}
   m_Layer: 7
   m_Name: Model
   m_TagString: Untagged
@@ -2816,6 +2801,23 @@ MonoBehaviour:
   _includeInactive: 0
   _localizeShake: 1
   _randomizeDirections: 1
+--- !u!114 &734084606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 734084602}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d72f66df91b41304b92365de92f39380, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _removeFromManagerOnDisable: 1
+  _limitMagnitude: 0
+  _positionalMagnitudeLimit: 10
+  _rotationalMagnitudeLimit: 3
+  _shakeOnEnable: {fileID: 11400000, guid: 69429e915cc228b4387e109f3d373441, type: 2}
 --- !u!1 &737125968
 GameObject:
   m_ObjectHideFlags: 0
@@ -2975,6 +2977,8 @@ GameObject:
   m_Component:
   - component: {fileID: 816871809}
   - component: {fileID: 816871810}
+  - component: {fileID: 816871812}
+  - component: {fileID: 816871811}
   m_Layer: 7
   m_Name: Model
   m_TagString: Untagged
@@ -3049,6 +3053,44 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &816871811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 816871808}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d72f66df91b41304b92365de92f39380, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _removeFromManagerOnDisable: 1
+  _limitMagnitude: 0
+  _positionalMagnitudeLimit: 10
+  _rotationalMagnitudeLimit: 3
+  _shakeOnEnable: {fileID: 11400000, guid: 69429e915cc228b4387e109f3d373441, type: 2}
+--- !u!114 &816871812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 816871808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1668e20ecaba69547a8a160014c5640b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shakerType: 1
+  _positionalMultiplier: 2
+  _rotationalMultiplier: 1
+  _requireInView: 1
+  _includeChildren: 0
+  _ignoreSelf: 0
+  _includeInactive: 0
+  _localizeShake: 1
+  _randomizeDirections: 1
 --- !u!1 &843659133
 GameObject:
   m_ObjectHideFlags: 0
@@ -3060,6 +3102,7 @@ GameObject:
   - component: {fileID: 843659134}
   - component: {fileID: 843659135}
   - component: {fileID: 843659136}
+  - component: {fileID: 843659137}
   m_Layer: 7
   m_Name: Model
   m_TagString: Untagged
@@ -3155,6 +3198,23 @@ MonoBehaviour:
   _includeInactive: 0
   _localizeShake: 1
   _randomizeDirections: 1
+--- !u!114 &843659137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 843659133}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d72f66df91b41304b92365de92f39380, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _removeFromManagerOnDisable: 1
+  _limitMagnitude: 0
+  _positionalMagnitudeLimit: 10
+  _rotationalMagnitudeLimit: 3
+  _shakeOnEnable: {fileID: 11400000, guid: 69429e915cc228b4387e109f3d373441, type: 2}
 --- !u!1 &888457465
 GameObject:
   m_ObjectHideFlags: 0
@@ -3320,7 +3380,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 976129324}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.8055744, y: 4.3601317, z: -0.2420066}
+  m_LocalPosition: {x: 6.96, y: -0.83, z: -0.2420066}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4464,6 +4524,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parryCollider: {fileID: 196605460}
   parryForce: 60
+  enemiesToShake: []
 --- !u!1 &1288052421
 GameObject:
   m_ObjectHideFlags: 0
@@ -5541,6 +5602,7 @@ GameObject:
   - component: {fileID: 1789451690}
   - component: {fileID: 1789451691}
   - component: {fileID: 1789451692}
+  - component: {fileID: 1789451693}
   m_Layer: 7
   m_Name: Model
   m_TagString: Untagged
@@ -5636,6 +5698,23 @@ MonoBehaviour:
   _includeInactive: 0
   _localizeShake: 1
   _randomizeDirections: 1
+--- !u!114 &1789451693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789451689}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d72f66df91b41304b92365de92f39380, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _removeFromManagerOnDisable: 1
+  _limitMagnitude: 0
+  _positionalMagnitudeLimit: 10
+  _rotationalMagnitudeLimit: 3
+  _shakeOnEnable: {fileID: 11400000, guid: 69429e915cc228b4387e109f3d373441, type: 2}
 --- !u!1 &1794796734
 GameObject:
   m_ObjectHideFlags: 0
@@ -6395,6 +6474,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1999135445}
   - component: {fileID: 1999135446}
+  - component: {fileID: 1999135448}
+  - component: {fileID: 1999135447}
   m_Layer: 7
   m_Name: Model
   m_TagString: Untagged
@@ -6469,6 +6550,44 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1999135447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1999135444}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d72f66df91b41304b92365de92f39380, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _removeFromManagerOnDisable: 1
+  _limitMagnitude: 0
+  _positionalMagnitudeLimit: 10
+  _rotationalMagnitudeLimit: 3
+  _shakeOnEnable: {fileID: 11400000, guid: 69429e915cc228b4387e109f3d373441, type: 2}
+--- !u!114 &1999135448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1999135444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1668e20ecaba69547a8a160014c5640b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shakerType: 1
+  _positionalMultiplier: 2
+  _rotationalMultiplier: 1
+  _requireInView: 1
+  _includeChildren: 0
+  _ignoreSelf: 0
+  _includeInactive: 0
+  _localizeShake: 1
+  _randomizeDirections: 1
 --- !u!1 &1999765051
 GameObject:
   m_ObjectHideFlags: 0
@@ -6840,6 +6959,7 @@ GameObject:
   - component: {fileID: 2137638331}
   - component: {fileID: 2137638330}
   - component: {fileID: 2137638332}
+  - component: {fileID: 2137638333}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -6935,3 +7055,20 @@ MonoBehaviour:
   _includeInactive: 0
   _localizeShake: 1
   _randomizeDirections: 1
+--- !u!114 &2137638333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2137638329}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d72f66df91b41304b92365de92f39380, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _removeFromManagerOnDisable: 1
+  _limitMagnitude: 0
+  _positionalMagnitudeLimit: 10
+  _rotationalMagnitudeLimit: 3
+  _shakeOnEnable: {fileID: 11400000, guid: 69429e915cc228b4387e109f3d373441, type: 2}

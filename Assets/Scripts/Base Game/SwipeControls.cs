@@ -51,7 +51,7 @@ public class SwipeControls : MonoBehaviour
             }
             else if (touch.phase == TouchPhase.Ended) //check if the finger is removed from the screen
             {
-                print("Release Frame Count: " + holdFrameCount);
+                //print("Release Frame Count: " + holdFrameCount);
                 lp = touch.position;  //last touch position. Ommitted if you use list
                 holdFrameCount = 0;
 
@@ -85,18 +85,15 @@ public class SwipeControls : MonoBehaviour
                         if (lp.y > fp.y)  //If the movement was up
                         {   //Up swipe
                             isUpSwipe = true;
-                            Debug.Log("Up Swipe");
                         }
                         else
                         {   //Down swipe
-                            Debug.Log("Down Swipe");
                         }
                     }
                 }
                 else
                 {   //It's a tap as the drag distance is less than 20% of the screen height
                     isTap = true;
-                    Debug.Log("Tap");
                 }
             }
         }

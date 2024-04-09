@@ -1,14 +1,10 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    private MoveLeft movement;
     internal float score;
     internal int highScore;
     [SerializeField] protected GameObject scorePopsUp;
@@ -18,7 +14,6 @@ public class GameManager : MonoBehaviour
         instance = this;
         CollisionReset();
         highScore = PlayerPrefs.GetInt("HighScore");
-        movement = GameObject.Find("Background").GetComponentInChildren<MoveLeft>();
     }
 
     private void CollisionReset()
@@ -49,14 +44,13 @@ public class GameManager : MonoBehaviour
         }
 
         if (PlayerController.instance.playerDeath.isDead) return;
-
-        score += movement.velocity * Time.deltaTime;
+        score += (PlayerController.instance.playerSpeed + MoveLeft.acceleration) * Time.deltaTime;
     }
     internal void ScoreUp(int score, Transform spawnPos)
     {
         GameObject popsUpEffect = Instantiate(scorePopsUp,
             spawnPos.position + new Vector3(-0.25f, 1.5f, 0), Quaternion.identity);
-        popsUpEffect.GetComponentInChildren<TMP_Text>().text = "+" + score.ToString();
+        popsUpEffect.GetComponentInChildren<TMP_Text>().text = "+" + score;
         GameManager.instance.score += score;
     }
 }

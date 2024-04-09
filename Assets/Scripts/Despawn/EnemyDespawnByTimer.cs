@@ -9,7 +9,7 @@ public class EnemyDespawnByTimer : Despawn
     [SerializeField] protected float delay = 3;
     [SerializeField] protected float timer = 0;
 
-    private void Start()
+    private new void Start()
     {
         enemy = transform.parent.GetComponent<BaseEnemy>();
         enemyDeath = transform.parent.GetComponent<EnemyDeath>();

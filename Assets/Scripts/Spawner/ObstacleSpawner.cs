@@ -28,7 +28,7 @@ public class ObstacleSpawner : Spawner
             yield return new WaitForSeconds(spawnRate);
             Transform obstaclePrefab = GetRandomPrefab();
             Quaternion rotation = Quaternion.identity;
-            Vector2 spawnPos = new Vector2(Random.Range(17, 19), -3.75f);
+            Vector2 spawnPos = new Vector2(Random.Range(17, 19), -2.7f);
             Transform newObstacle = Spawn(obstaclePrefab, spawnPos, rotation);
             newObstacle.gameObject.SetActive(true);
         }

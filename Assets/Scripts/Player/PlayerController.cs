@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class PlayerController : SaiMonoBehavior
 {
-    public static PlayerController instance;    
+    public static PlayerController instance;
+    internal readonly float playerSpeed = 10; //player representative speed
 
     [SerializeField] internal Rigidbody2D playerRb;
     [SerializeField] internal PlayerJump playerJump;
