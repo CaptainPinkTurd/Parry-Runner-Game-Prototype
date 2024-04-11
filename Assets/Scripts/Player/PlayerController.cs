@@ -7,6 +7,7 @@ public class PlayerController : SaiMonoBehavior
 {
     public static PlayerController instance;
     internal readonly float playerSpeed = 10; //player representative speed
+    internal SpriteRenderer model;
 
     [SerializeField] internal Rigidbody2D playerRb;
     [SerializeField] internal PlayerJump playerJump;
@@ -20,6 +21,7 @@ public class PlayerController : SaiMonoBehavior
     // Start is called before the first frame update
     protected override void LoadComponentsAndValues()
     {
+        model = GetComponentInChildren<SpriteRenderer>();
         LoadPlayerBehaviors();
     }
 

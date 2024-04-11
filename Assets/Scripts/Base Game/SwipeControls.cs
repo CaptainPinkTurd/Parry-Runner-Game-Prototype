@@ -46,6 +46,7 @@ public class SwipeControls : MonoBehaviour
                 if(holdFrameCount >= 5)
                 {
                     //print("Current Frame Count: " + holdFrameCount);
+                    PlayerController.instance.model.color = Color.yellow;
                     isHolding = true;
                 }
             }
@@ -67,6 +68,7 @@ public class SwipeControls : MonoBehaviour
 
                             if (!isHolding) return;
 
+                            PlayerController.instance.model.color = Color.white;
                             isHolding = false;
                             isTap = true;
                         }
@@ -76,6 +78,7 @@ public class SwipeControls : MonoBehaviour
 
                             if (!isHolding) return;
 
+                            PlayerController.instance.model.color = Color.white;
                             isHolding = false;
                             isTap = true;
                         }

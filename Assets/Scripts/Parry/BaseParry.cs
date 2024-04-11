@@ -48,4 +48,23 @@ public abstract class BaseParry : SaiMonoBehavior
     internal abstract IEnumerator Parry(GameObject enemyObject); //initiate parry sequence
     protected abstract void ParryKnockBack(GameObject enemyObject); //force apply when parry
     protected abstract IEnumerator TurnOffParryConditions(GameObject enemyObject); //reset variables when parry end
+    protected virtual void EnemyReposition(GameObject enemyObject)
+    {
+        if (enemyObject.transform.position.x > transform.parent.position.x + 1) return;
+
+        //Reposition the enemy if they phase through the player mid parry
+        enemyObject.transform.Translate(Vector3.right * 2.25f, Space.World);
+    }
+    protected virtual IEnumerator CheckForEnemyDirection(GameObject enemyObject)
+    {
+        if (enemyObject.transform.position.x > transform.parent.position.x - 0.5f)
+        {
+            yield return new WaitForSeconds(0.09f);
+            yield break;
+        }
+
+        PlayerController.instance.model.flipX = true;
+        yield return new WaitForSeconds(0.3f);
+        PlayerController.instance.model.flipX = false;
+    }
 }

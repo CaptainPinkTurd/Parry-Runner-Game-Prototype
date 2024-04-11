@@ -20,6 +20,7 @@ public class PlayerParry : BaseParry
     {
         enemiesToShake.Clear();
         isParry = true; //cue for parry animation
+        if (consecutiveParry) parryCollider.enabled = true; //immediate activation when consecutive parry
 
         yield return new WaitForSecondsRealtime(0.06f); //parry prepare time
 
@@ -96,13 +97,6 @@ public class PlayerParry : BaseParry
         if (!isParry || PlayerController.instance.playerRoll.isRolling) return;
         consecutiveParry = true;
     }
-    protected virtual void EnemyReposition(GameObject enemyObject)
-    {
-        if (enemyObject.transform.position.x > transform.parent.position.x && PlayerController.instance.playerRoll.isRolling) return;
-
-        //Reposition the enemy if they phase through the player mid parry
-        enemyObject.transform.Translate(Vector3.right * 2.25f, Space.World);
-    }
     protected virtual IEnumerator HitStopController(GameObject enemyObject)
     {
         if (PlayerController.instance.playerRoll.isRolling)
@@ -144,9 +138,9 @@ public class PlayerParry : BaseParry
             AudioManager.instance.Play("CounterSlash");
             HitStop.instance.Stop(0.125f);
 
-            yield return new WaitForSeconds(0.09f);
+            yield return StartCoroutine(CheckForEnemyDirection(enemyObject));
 
-            EnemyReposition(enemyObject);
+            //EnemyReposition(enemyObject);
         }
         else //Not a hitstop
         {
@@ -159,9 +153,9 @@ public class PlayerParry : BaseParry
         AudioManager.instance.Play("CounterSlash");
         //hit stop shouldn't occur when player is in zone 
 
-        yield return new WaitForSeconds(0.09f);
+        yield return StartCoroutine(CheckForEnemyDirection(enemyObject));
 
-        EnemyReposition(enemyObject);
+        //EnemyReposition(enemyObject);
     }
 
     private IEnumerator RollingHitStop(GameObject enemyObject)

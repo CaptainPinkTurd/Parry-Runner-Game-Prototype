@@ -40,7 +40,7 @@ public class DifficultyScaling : SaiMonoBehavior
     {
         float speedChangeRatio = MoveLeft.acceleration / maxAcceleration;
 
-        MoveLeft.acceleration += maxAcceleration * (1 - speedChangeRatio) * scalingRate;
+        MoveLeft.acceleration += maxAcceleration * (1 - speedChangeRatio) * scalingRate * 0.75f;
         if(MoveLeft.acceleration >= maxAcceleration)
         {
             MoveLeft.acceleration = maxAcceleration;
@@ -52,7 +52,7 @@ public class DifficultyScaling : SaiMonoBehavior
         float spawnRateRatio = EnemySpawner.spawnRate / minSpawnRate; 
         //ratio is negative that's why addition was used
 
-        EnemySpawner.spawnRate += minSpawnRate * (1 - spawnRateRatio) * scalingRate * 2;
+        EnemySpawner.spawnRate += minSpawnRate * (1 - spawnRateRatio) * scalingRate * 1.5f;
         if(EnemySpawner.spawnRate <= minSpawnRate)
         {
             EnemySpawner.spawnRate = minSpawnRate;
